@@ -1,6 +1,7 @@
 package org.example.model;
 
-public class Field implements Cloneable{
+public class Field implements Cloneable {
+    //keep track of where a blank space is in the board
     private int x;
     private int y;
 
