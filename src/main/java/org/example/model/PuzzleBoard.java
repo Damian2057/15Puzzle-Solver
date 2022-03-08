@@ -116,4 +116,8 @@ public class PuzzleBoard implements Cloneable{
         clone.setBoard(board);
         return clone;
     }
+
+    public boolean checkValidation() {
+        return true;
+    }
 }
