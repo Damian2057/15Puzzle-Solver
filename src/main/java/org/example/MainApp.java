@@ -22,13 +22,16 @@ public class MainApp {
         };
 
         PuzzleBoard board = new PuzzleBoard(start,4,4);
+        System.out.println(board.toString());
 
         timeStart = System.nanoTime();
 
         //Execution of the algorithm here
         //
         //
-        //****
+        //
+        //
+        //Execution of the algorithm above
 
         timeStop = System.nanoTime();
 

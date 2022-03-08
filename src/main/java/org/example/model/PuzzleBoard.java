@@ -30,11 +30,7 @@ public class PuzzleBoard implements Cloneable{
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (board[i][j] > 9) {
                     stringBuilder.append("[").append(board[i][j]).append("]");
-                } else {
-                    stringBuilder.append("[ ").append(board[i][j]).append("]");
-                }
             }
             stringBuilder.append("\n");
         }
