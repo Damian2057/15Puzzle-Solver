@@ -1,7 +1,6 @@
 package org.example.model;
 
 import org.example.Exceptions.CloneException;
-import org.jetbrains.annotations.NotNull;
 
 public class PuzzleBoard implements Cloneable {
 
@@ -13,7 +12,7 @@ public class PuzzleBoard implements Cloneable {
     private final int width;
     private final int height;
 
-    public PuzzleBoard(@NotNull int[][] board, int width, int height) {
+    public PuzzleBoard(int[][] board, int width, int height) {
         this.board = board;
         this.width = width;
         this.height = height;
@@ -83,7 +82,7 @@ public class PuzzleBoard implements Cloneable {
         return stepToSolve;
     }
 
-    public void setBoard(@NotNull int[][] board) {
+    public void setBoard(int[][] board) {
         this.board = board;
     }
 

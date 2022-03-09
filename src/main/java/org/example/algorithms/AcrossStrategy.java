@@ -21,14 +21,12 @@ public class AcrossStrategy extends MaxDepth implements strategy{
         }
     }
 
-    int depth;
     @Override
     public void recursionSolver() {
         try {
             if(utilityBoard.checkValidation()) {
-                System.out.println(utilityBoard.getStepToSolve());
-                System.out.println(utilityBoard.toString());
                 //checking if the board is already solved
+                System.out.println(utilityBoard.toString());
                 return;
             }
 
@@ -38,7 +36,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
             }
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
-            this.utilityBoard = allBoards.poll();
+            this.utilityBoard = allBoards.pollFirst();
             if(!allBoards.isEmpty()) {
                 recursionSolver();
             }

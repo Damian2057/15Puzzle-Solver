@@ -16,10 +16,10 @@ public class MainApp {
         long timeStop;
 
         int[][] start = { //to Test
-                {0,1,2,4},
-                {6,7,3,8},
-                {5,9,10,11},
-                {13,14,15,12}
+                {5,1,2,4},
+                {9,7,3,8},
+                {13,6,10,11},
+                {14,0,15,12}
         };
 
         int[][] start2 = { //to Test
@@ -39,7 +39,7 @@ public class MainApp {
         //Execution of the algorithm here
         //
         //
-         new AcrossStrategy(board, "UDLR");
+        AcrossStrategy acrossStrategy = new AcrossStrategy(board, "UDLR");
         //
         //
         //Execution of the algorithm above
