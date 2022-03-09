@@ -1,3 +1,5 @@
+package org.example.algorithms;
+
 import org.jetbrains.annotations.NotNull;
 
 public class DeeperStrategy extends MaxDepth implements strategy {

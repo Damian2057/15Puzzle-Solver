@@ -1,7 +1,12 @@
+package org.example.algorithms;
+
+import org.example.Exceptions.SolutionException;
+import org.example.MainApp;
+import org.example.model.PuzzleBoard;
 
 import java.util.LinkedList;
 
-public class AcrossStrategy extends MaxDepth implements strategy{
+public class AcrossStrategy extends MaxDepth implements strategy {
 
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
@@ -13,16 +18,25 @@ public class AcrossStrategy extends MaxDepth implements strategy{
         try {
             recursionSolver();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new SolutionException("Exp error");
         }
+    }
+
+    public PuzzleBoard getUtilityBoard() {
+        return utilityBoard;
     }
 
     @Override
     public void recursionSolver() {
         try {
+
+            if(MainApp.recursionDepth < utilityBoard.getStepToSolve()) {
+                MainApp.recursionDepth = utilityBoard.getStepToSolve();
+            }
+
+            MainApp.visitedStates++;
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
-                System.out.println(utilityBoard.toString());
                 return;
             }
 
@@ -37,8 +51,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
                 recursionSolver();
             }
         } catch (Exception e) {
-//            throw new SolutionException("Error getting solution");
-            e.printStackTrace();
+            throw new SolutionException("Error getting solution");
         }
     }
 
@@ -57,6 +70,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
                     allBoards.add(tempClone);
+                    MainApp.processedStates++;
                 }
             }
             case "L" -> {
@@ -66,6 +80,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
                     allBoards.add(tempClone);
+                    MainApp.processedStates++;
                 }
             }
             case "U" -> {
@@ -75,6 +90,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
                     allBoards.add(tempClone);
+                    MainApp.processedStates++;
                 }
             }
             case "D" -> {
@@ -84,6 +100,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
                     allBoards.add(tempClone);
+                    MainApp.processedStates++;
                 }
             }
         }
