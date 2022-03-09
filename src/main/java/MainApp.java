@@ -1,8 +1,3 @@
-package org.example;
-
-import org.example.algorithms.AcrossStrategy;
-import org.example.model.PuzzleBoard;
-
 public class MainApp {
 
     public static int solutionlength;
@@ -16,9 +11,9 @@ public class MainApp {
         long timeStop;
 
         int[][] start = { //to Test
-                {5,1,2,4},
-                {9,7,3,8},
-                {13,6,10,11},
+                {1,2,3,4},
+                {5,10,6,7},
+                {13,9,11,8},
                 {14,0,15,12}
         };
 

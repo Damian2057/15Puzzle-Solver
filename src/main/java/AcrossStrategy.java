@@ -1,7 +1,3 @@
-package org.example.algorithms;
-
-import org.example.model.PuzzleBoard;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
@@ -11,7 +7,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
     private PuzzleBoard utilityBoard;
     private final String sequence;
 
-    public AcrossStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence) {
+    public AcrossStrategy(PuzzleBoard puzzleBoard, String sequence) {
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
         try {
@@ -47,7 +43,7 @@ public class AcrossStrategy extends MaxDepth implements strategy{
     }
 
     @Override
-    public void doStepBySign(@NotNull String sign) {
+    public void doStepBySign(String sign) {
         //We shift the field accordingly in one of the 4 trajectories.
         //The shift must satisfy the condition:
         // it is not an extreme shift, beyond the arrays

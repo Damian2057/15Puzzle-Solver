@@ -1,7 +1,3 @@
-package org.example.model;
-
-import org.example.Exceptions.CloneException;
-
 public class PuzzleBoard implements Cloneable {
 
     private int[][] board;

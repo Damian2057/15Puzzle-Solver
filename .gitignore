@@ -1,3 +1,6 @@
 .idea
 target
 dependency-reduced-pom.xml
+.class
+/src/main/java/*.class
+
