@@ -29,7 +29,6 @@ public class AcrossStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-
             if(MainApp.recursionDepth < utilityBoard.getStepToSolve()) {
                 MainApp.recursionDepth = utilityBoard.getStepToSolve();
             }
@@ -52,6 +51,7 @@ public class AcrossStrategy extends MaxDepth implements strategy {
                 recursionSolver();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new SolutionException("Error getting solution");
         }
     }

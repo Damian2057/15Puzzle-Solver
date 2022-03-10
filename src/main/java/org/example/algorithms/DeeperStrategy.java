@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Stack;
 
 public class DeeperStrategy extends MaxDepth implements strategy {
+
     private final Stack<PuzzleBoard> allBoards = new Stack<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
@@ -28,7 +29,6 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-
             if(MainApp.recursionDepth < utilityBoard.getStepToSolve()) {
                 MainApp.recursionDepth = utilityBoard.getStepToSolve();
             }
@@ -41,16 +41,18 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
 
             //Calls for sequence permutations LDRU...
-            for (int i = 3; i >= 0; i--) {
+            for (int i = 0; i < 4; i++) {
                 doStepBySign(String.valueOf(sequence.charAt(i)));
             }
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pop();
-            if(!allBoards.isEmpty() && MainApp.recursionDepth <= 20) {
+            if(!allBoards.isEmpty() && MainApp.recursionDepth < maxDepth) {
+                System.out.println(allBoards.size());
                 recursionSolver();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new SolutionException("Error getting solution");
         }
     }
