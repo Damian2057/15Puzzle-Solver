@@ -4,7 +4,6 @@ import org.example.Exceptions.SolutionException;
 import org.example.MainApp;
 import org.example.model.PuzzleBoard;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.LinkedList;
 
 public class AcrossStrategy extends MaxDepth implements strategy {

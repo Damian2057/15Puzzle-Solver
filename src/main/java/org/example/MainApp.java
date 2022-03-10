@@ -1,4 +1,5 @@
 package org.example;
+
 import org.example.Exceptions.ArgsException;
 import org.example.algorithms.AcrossStrategy;
 import org.example.algorithms.DeeperStrategy;
@@ -12,7 +13,7 @@ public class MainApp {
     public static int processedStates;
     public static int recursionDepth;
 
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main(String[] args) {
 
         try {
             CheckArgs.checkArguments(args);

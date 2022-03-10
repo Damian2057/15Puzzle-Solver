@@ -1,7 +1,6 @@
 package org.example.model;
 
 import org.example.Exceptions.CloneException;
-
 import java.util.ArrayList;
 
 public class PuzzleBoard implements Cloneable {
