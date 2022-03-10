@@ -15,47 +15,68 @@ public class MainApp {
 
     public static void main(String[] args) {
 
-        try {
-            CheckArgs.checkArguments(args);
-        } catch (ArgsException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+//        try {
+//            CheckArgs.checkArguments(args);
+//        } catch (ArgsException e) {
+//            System.out.println(e.getMessage());
+//            return;
+//        }
 
         long timeStart = 0;
         long timeStop = 0;
 
-        int[][] start = { //to Test
+        byte[][] start = { //to Test
+                {0,1,2,7},
+                {8,9,12,10},
+                {13,3,6,4},
+                {15,14,11,5}
+        };
+
+        byte[][] start3 = { //to Test
+                {1,2,4,8},
+                {5,6,3,0},
+                {9,10,7,11},
+                {13,14,15,12}
+        };
+
+        byte[][] start4 = { //to Test
                 {1,2,3,4},
                 {5,6,7,8},
                 {9,10,11,12},
                 {13,14,15,0}
         };
 
-        int[][] start2 = { //to Test
-                {1,2,3},
-                {4,0,6},
-                {7,5,8},
-                {10,11,9},
-                {13,14,12},
+
+        byte[][] start2 = { //to Test
+                {0,1,3},
+                {5,2,6},
+                {4,7,9},
+                {10,8,12},
+                {13,11,14},
                 {16,17,15}
         };
 
-        PuzzleBoard board = new PuzzleBoard(start,4,4);
+        Integer h,w;
+        h = 6;
+        w = 3;
+
+        PuzzleBoard board = new PuzzleBoard(start2, w.byteValue() , h.byteValue());
         System.out.println(board.toString());
 
         //Execution of the algorithm here
         //
         //
-        //String xd = "bfs";
-        switch (args[0]) {
+        String xd = "dfs";
+        //args[0]
+        switch (xd) {
             case "bfs" -> {
                 timeStart = System.nanoTime();
-                AcrossStrategy acrossStrategy = new AcrossStrategy(board, args[1]);
+                AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RUDL");
                 timeStop = System.nanoTime();
             } case "dfs" -> {
                 timeStart = System.nanoTime();
-                DeeperStrategy deeperStrategy = new DeeperStrategy(board,args[1]);
+                DeeperStrategy deeperStrategy = new DeeperStrategy(board,"RUDL");
+                System.out.println(deeperStrategy.getUtilityBoard().toString());
                 timeStop = System.nanoTime();
             } case "astr" -> {
                 //A* here

@@ -41,7 +41,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
 
             //Calls for sequence permutations LDRU...
-            for (int i = 0; i < 4; i++) {
+            for (int i = 3; i >= 0; i--) {
                 doStepBySign(String.valueOf(sequence.charAt(i)));
             }
 
@@ -65,7 +65,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
         switch (sign) {
             case "R" -> {
                 //right border = height-1
-                if(utilityBoard.getEmptyField().getY() != utilityBoard.getHeight()-1
+                if(utilityBoard.getemptyYcordniate() != utilityBoard.getHeight()-1
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
@@ -75,7 +75,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
             case "L" -> {
                 //left border = 0
-                if(utilityBoard.getEmptyField().getY() != 0
+                if(utilityBoard.getemptyYcordniate() != 0
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
@@ -85,7 +85,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
             case "U" -> {
                 //up border = 0
-                if(utilityBoard.getEmptyField().getX() != 0
+                if(utilityBoard.getemptyXcordniate() != 0
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
@@ -95,7 +95,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
             case "D" -> {
                 //up border = width-1
-                if(utilityBoard.getEmptyField().getX() != utilityBoard.getWidth()-1
+                if(utilityBoard.getemptyXcordniate() != utilityBoard.getWidth()-1
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();

@@ -5,39 +5,43 @@ import java.util.ArrayList;
 
 public class PuzzleBoard implements Cloneable {
 
-    private int[][] board;
+    private byte[][] board;
     private String recentMove = "NONE";
     private int stepToSolve = 0;
-    private Field emptyField;
 
-    private final int width;
-    private final int height;
+    private int emptyXcordniate;
+    private int emptyYcordniate;
+
+    private final byte width;
+    private final byte height;
 
     private ArrayList<String> stepsToSolved = new ArrayList<>();
 
-    public PuzzleBoard(int[][] board, int width, int height) {
+    public PuzzleBoard(byte[][] board, byte width, byte height) {
         this.board = board;
         this.width = width;
         this.height = height;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (board[i][j] == 0) {
-                    emptyField = new Field(i,j);
+                    emptyXcordniate = i;
+                    emptyYcordniate = j;
                 }
             }
         }
     }
 
-    public int[][] generateSolvedBoard() {
-        int tempIndex = 1;
-        int[][] tempBoard = new int[height][width];
-        for (int i = 0; i < height; i++) {
+    public byte[][] generateSolvedBoard() {
+        byte tempIndex = 1;
+        byte h = this.height;
+        byte[][] tempBoard = new byte[h][width];
+        for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < width; j++) {
                 tempBoard[i][j] = tempIndex;
                 tempIndex ++;
             }
         }
-        tempBoard[height-1][width-1] = 0;
+        tempBoard[this.height -1][width-1] = 0;
         return tempBoard;
     }
     //When declaring, we first give the number of rows, then columns
@@ -77,12 +81,12 @@ public class PuzzleBoard implements Cloneable {
         return stringBuilder.toString();
     }
 
-    public Field getEmptyField() {
-        return emptyField;
+    public int getemptyXcordniate() {
+        return emptyXcordniate;
     }
 
-    public void setEmptyField(Field emptyField) {
-        this.emptyField = emptyField;
+    public int getemptyYcordniate() {
+        return emptyYcordniate;
     }
 
     public String getRecentMove() {
@@ -93,7 +97,7 @@ public class PuzzleBoard implements Cloneable {
         return stepToSolve;
     }
 
-    public void setBoard(int[][] board) {
+    public void setBoard(byte[][] board) {
         this.board = board;
     }
 
@@ -101,53 +105,54 @@ public class PuzzleBoard implements Cloneable {
         this.recentMove = "R";
         stepsToSolved.add("R");
         stepToSolve++;
-        this.board[emptyField.getX()][emptyField.getY()]
-                = this.board[emptyField.getX()][emptyField.getY()+1];
-        this.board[emptyField.getX()][emptyField.getY()+1] = 0;
-        emptyField.setY(emptyField.getY()+1);
+        this.board[emptyXcordniate][emptyYcordniate]
+                = this.board[emptyXcordniate][emptyYcordniate+1];
+        this.board[emptyXcordniate][emptyYcordniate+1] = 0;
+        emptyYcordniate = emptyYcordniate +1;
     }
 
     public void moveEmptyFieldLeft() {
         this.recentMove = "L";
         stepsToSolved.add("L");
         stepToSolve++;
-        this.board[emptyField.getX()][emptyField.getY()]
-                = this.board[emptyField.getX()][emptyField.getY()-1];
-        this.board[emptyField.getX()][emptyField.getY()-1] = 0;
-        emptyField.setY(emptyField.getY()-1);
+        this.board[emptyXcordniate][emptyYcordniate]
+                = this.board[emptyXcordniate][emptyYcordniate-1];
+        this.board[emptyXcordniate][emptyYcordniate-1] = 0;
+        emptyYcordniate = emptyYcordniate -1;
     }
 
     public void moveEmptyFieldUp() {
         this.recentMove = "U";
         stepsToSolved.add("U");
         stepToSolve++;
-        this.board[emptyField.getX()][emptyField.getY()]
-                = this.board[emptyField.getX()-1][emptyField.getY()];
-        this.board[emptyField.getX()-1][emptyField.getY()] = 0;
-        emptyField.setX(emptyField.getX()-1);
+        this.board[emptyXcordniate][emptyYcordniate]
+                = this.board[emptyXcordniate-1][emptyYcordniate];
+        this.board[emptyXcordniate-1][emptyYcordniate] = 0;
+        emptyXcordniate = emptyXcordniate -1;
     }
 
     public void moveEmptyFieldDown() {
         this.recentMove = "D";
         stepsToSolved.add("D");
         stepToSolve++;
-        this.board[emptyField.getX()][emptyField.getY()]
-                = this.board[emptyField.getX()+1][emptyField.getY()];
-        this.board[emptyField.getX()+1][emptyField.getY()] = 0;
-        emptyField.setX(emptyField.getX()+1);
+        this.board[emptyXcordniate][emptyYcordniate]
+                = this.board[emptyXcordniate+1][emptyYcordniate];
+        this.board[emptyXcordniate+1][emptyYcordniate] = 0;
+        emptyXcordniate = emptyXcordniate + 1;
     }
 
     @Override
     public PuzzleBoard clone() {
         try {
+            byte H = Byte.parseByte(String.valueOf(height));
+
             PuzzleBoard clone = (PuzzleBoard) super.clone();
-            int[][] board = new int[height][width];
+            byte[][] board = new byte[H][width];
             for (int i = 0; i < height; i++) {
                 System.arraycopy(this.board[i], 0, board[i], 0, width);
             }
             ArrayList<String> copySteps = new ArrayList<>(stepsToSolved);
             clone.setStepsToSolved(copySteps);
-            clone.setEmptyField(this.getEmptyField().clone());
             clone.setBoard(board);
             return clone;
         } catch (CloneNotSupportedException e) {
@@ -157,7 +162,7 @@ public class PuzzleBoard implements Cloneable {
     }
 
     public boolean checkValidation() {
-        int[][] tempBoard = generateSolvedBoard();
+        byte[][] tempBoard = generateSolvedBoard();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (tempBoard[i][j] != this.board[i][j]) {
@@ -167,4 +172,6 @@ public class PuzzleBoard implements Cloneable {
         }
         return true;
     }
+
+
 }
