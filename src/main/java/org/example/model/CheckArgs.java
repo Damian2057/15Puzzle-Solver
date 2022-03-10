@@ -25,5 +25,10 @@ public class CheckArgs {
                 || !args[1].contains("D")) {
             throw new ArgsException("Wrong permutation of the search order");
         }
+        if(!args[2].contains(".txt")
+                || !args[3].contains(".txt")
+                || !args[4].contains(".txt")) {
+            throw new ArgsException("Some of the files are not of the correct type");
+        }
     }
 }
