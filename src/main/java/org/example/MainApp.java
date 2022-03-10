@@ -3,6 +3,7 @@ package org.example;
 import org.example.Exceptions.ArgsException;
 import org.example.algorithms.AcrossStrategy;
 import org.example.algorithms.DeeperStrategy;
+import org.example.fileSystem.FileFactory;
 import org.example.model.CheckArgs;
 import org.example.model.PuzzleBoard;
 
@@ -14,16 +15,6 @@ public class MainApp {
     public static int recursionDepth;
 
     public static void main(String[] args) {
-
-//        try {
-//            CheckArgs.checkArguments(args);
-//        } catch (ArgsException e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
-
-        long timeStart = 0;
-        long timeStop = 0;
 
         byte[][] start = { //to Test
                 {0,1,2,7},
@@ -56,44 +47,49 @@ public class MainApp {
                 {16,17,15}
         };
 
-        Integer h,w;
-        h = 6;
-        w = 3;
 
-        PuzzleBoard board = new PuzzleBoard(start2, w.byteValue() , h.byteValue());
-        System.out.println(board.toString());
+//        try {
+//            CheckArgs.checkArguments(args);
+//        } catch (ArgsException e) {
+//            System.out.println(e.getMessage());
+//            return;
+//        }
 
-        //Execution of the algorithm here
-        //
-        //
-        String xd = "dfs";
-        //args[0]
-        switch (xd) {
-            case "bfs" -> {
-                timeStart = System.nanoTime();
-                AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RUDL");
-                timeStop = System.nanoTime();
-            } case "dfs" -> {
-                timeStart = System.nanoTime();
-                DeeperStrategy deeperStrategy = new DeeperStrategy(board,"RUDL");
-                System.out.println(deeperStrategy.getUtilityBoard().toString());
-                timeStop = System.nanoTime();
-            } case "astr" -> {
-                //A* here
-            } default -> {
-                System.out.println("Incorrect strategy");
-                return;
+
+        try {
+            FileFactory f = new FileFactory();
+            byte[][] board = f.getPuzzle("C:\\Users\\Damian\\Desktop\\test.txt");
+
+            PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
+
+            System.out.println(puzzleBoard.toString());
+            String xd = "dfs";
+            switch (xd) {
+                case "bfs" -> {
+                    AcrossStrategy acrossStrategy = new AcrossStrategy(puzzleBoard, "RUDL");
+                    System.out.println(acrossStrategy.getUtilityBoard().toString());
+                } case "dfs" -> {
+                    DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"RUDL");
+                    System.out.println(deeperStrategy.getUtilityBoard().toString());
+                } case "astr" -> {
+                    //A* here
+                } default -> {
+                    System.out.println("Incorrect strategy");
+                    return;
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        //
-        //
-        //Execution of the algorithm above
+//        long timeStart = 0;
+//        long timeStop = 0;
+//        timeStart = System.currentTimeMillis();
+//        double delay = ((timeStop - timeStart) / 1000) / 1000.0;
 
-        double delay = ((timeStop - timeStart) / 1000) / 1000.0;
-
-        System.out.println("Visited States: "+ visitedStates);
-        System.out.println("Processed States: "+processedStates);
-        System.out.println("Max depth: "+ recursionDepth);
+//        System.out.println("Visited States: "+ visitedStates);
+//        System.out.println("Processed States: "+processedStates);
+//        System.out.println("Max depth: "+ recursionDepth);
 //        System.out.println("Solution lenght: "+deeperStrategy.getUtilityBoard().getStepToSolve());
 //        System.out.println(deeperStrategy.getUtilityBoard().getStepsToSolved().toString());
 //        System.out.println("TIME: "+delay+" ms");

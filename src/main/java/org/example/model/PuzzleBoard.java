@@ -2,6 +2,8 @@ package org.example.model;
 
 import org.example.Exceptions.CloneException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class PuzzleBoard implements Cloneable {
 
@@ -33,8 +35,7 @@ public class PuzzleBoard implements Cloneable {
 
     public byte[][] generateSolvedBoard() {
         byte tempIndex = 1;
-        byte h = this.height;
-        byte[][] tempBoard = new byte[h][width];
+        byte[][] tempBoard = new byte[height][width];
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < width; j++) {
                 tempBoard[i][j] = tempIndex;
@@ -108,7 +109,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate+1];
         this.board[emptyXcordniate][emptyYcordniate+1] = 0;
-        emptyYcordniate = emptyYcordniate +1;
+        emptyYcordniate = emptyYcordniate + 1;
     }
 
     public void moveEmptyFieldLeft() {
@@ -118,7 +119,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate-1];
         this.board[emptyXcordniate][emptyYcordniate-1] = 0;
-        emptyYcordniate = emptyYcordniate -1;
+        emptyYcordniate = emptyYcordniate - 1;
     }
 
     public void moveEmptyFieldUp() {
@@ -128,7 +129,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate-1][emptyYcordniate];
         this.board[emptyXcordniate-1][emptyYcordniate] = 0;
-        emptyXcordniate = emptyXcordniate -1;
+        emptyXcordniate = emptyXcordniate - 1;
     }
 
     public void moveEmptyFieldDown() {
@@ -144,14 +145,13 @@ public class PuzzleBoard implements Cloneable {
     @Override
     public PuzzleBoard clone() {
         try {
-            byte H = Byte.parseByte(String.valueOf(height));
-
             PuzzleBoard clone = (PuzzleBoard) super.clone();
-            byte[][] board = new byte[H][width];
+            byte[][] board = new byte[height][width];
             for (int i = 0; i < height; i++) {
                 System.arraycopy(this.board[i], 0, board[i], 0, width);
             }
-            ArrayList<String> copySteps = new ArrayList<>(stepsToSolved);
+            ArrayList<String> copySteps = new ArrayList<>();
+            copySteps.addAll(stepsToSolved);
             clone.setStepsToSolved(copySteps);
             clone.setBoard(board);
             return clone;
