@@ -1,6 +1,8 @@
 package org.example;
+import org.example.Exceptions.ArgsException;
 import org.example.algorithms.AcrossStrategy;
 import org.example.algorithms.DeeperStrategy;
+import org.example.model.CheckArgs;
 import org.example.model.PuzzleBoard;
 
 public class MainApp {
@@ -11,6 +13,13 @@ public class MainApp {
     public static int recursionDepth;
 
     public static void main(String[] args) throws CloneNotSupportedException {
+
+        try {
+            CheckArgs.checkArguments(args);
+        } catch (ArgsException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         long timeStart = 0;
         long timeStop = 0;
@@ -41,21 +50,19 @@ public class MainApp {
         switch (args[0]) {
             case "bfs" -> {
                 timeStart = System.nanoTime();
-                AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RULD");
+                AcrossStrategy acrossStrategy = new AcrossStrategy(board, args[1]);
                 timeStop = System.nanoTime();
-            }
-            case "dfs" -> {
+            } case "dfs" -> {
                 timeStart = System.nanoTime();
-                DeeperStrategy deeperStrategy = new DeeperStrategy(board,"RLDU");
+                DeeperStrategy deeperStrategy = new DeeperStrategy(board,args[1]);
                 timeStop = System.nanoTime();
             } case "astr" -> {
-
-            }default -> {
+                //A* here
+            } default -> {
                 System.out.println("Incorrect strategy");
                 return;
             }
         }
-        //AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RULD");
         //
         //
         //Execution of the algorithm above
