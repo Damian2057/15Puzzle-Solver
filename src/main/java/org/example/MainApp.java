@@ -1,5 +1,6 @@
 package org.example;
 import org.example.algorithms.AcrossStrategy;
+import org.example.algorithms.DeeperStrategy;
 import org.example.model.PuzzleBoard;
 
 public class MainApp {
@@ -11,14 +12,14 @@ public class MainApp {
 
     public static void main(String[] args) throws CloneNotSupportedException {
 
-        long timeStart;
-        long timeStop;
+        long timeStart = 0;
+        long timeStop = 0;
 
         int[][] start = { //to Test
                 {1,2,3,4},
-                {5,10,6,7},
-                {13,9,11,8},
-                {14,0,15,12}
+                {5,6,7,8},
+                {9,10,11,12},
+                {13,14,15,0}
         };
 
         int[][] start2 = { //to Test
@@ -33,26 +34,40 @@ public class MainApp {
         PuzzleBoard board = new PuzzleBoard(start,4,4);
         System.out.println(board.toString());
 
-        timeStart = System.nanoTime();
-
         //Execution of the algorithm here
         //
         //
-        AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RULD");
+        //String xd = "bfs";
+        switch (args[0]) {
+            case "bfs" -> {
+                timeStart = System.nanoTime();
+                AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RULD");
+                timeStop = System.nanoTime();
+            }
+            case "dfs" -> {
+                timeStart = System.nanoTime();
+                DeeperStrategy deeperStrategy = new DeeperStrategy(board,"RLDU");
+                timeStop = System.nanoTime();
+            } case "astr" -> {
+
+            }default -> {
+                System.out.println("Incorrect strategy");
+                return;
+            }
+        }
+        //AcrossStrategy acrossStrategy = new AcrossStrategy(board, "RULD");
         //
         //
         //Execution of the algorithm above
-
-        timeStop = System.nanoTime();
 
         double delay = ((timeStop - timeStart) / 1000) / 1000.0;
 
         System.out.println("Visited States: "+ visitedStates);
         System.out.println("Processed States: "+processedStates);
         System.out.println("Max depth: "+ recursionDepth);
-        System.out.println("Solution lenght: "+acrossStrategy.getUtilityBoard().getStepToSolve());
-        System.out.println(acrossStrategy.getUtilityBoard().getStepsToSolved().toString());
-        System.out.println("TIME: "+delay+" ms");
+//        System.out.println("Solution lenght: "+deeperStrategy.getUtilityBoard().getStepToSolve());
+//        System.out.println(deeperStrategy.getUtilityBoard().getStepsToSolved().toString());
+//        System.out.println("TIME: "+delay+" ms");
 
 
     }

@@ -3,6 +3,7 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.MainApp;
 import org.example.model.PuzzleBoard;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
@@ -12,7 +13,7 @@ public class AcrossStrategy extends MaxDepth implements strategy {
     private PuzzleBoard utilityBoard;
     private final String sequence;
 
-    public AcrossStrategy(PuzzleBoard puzzleBoard, String sequence) {
+    public AcrossStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence) {
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
         try {
@@ -35,6 +36,7 @@ public class AcrossStrategy extends MaxDepth implements strategy {
             }
 
             MainApp.visitedStates++;
+
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
                 return;
@@ -56,7 +58,7 @@ public class AcrossStrategy extends MaxDepth implements strategy {
     }
 
     @Override
-    public void doStepBySign(String sign) {
+    public void doStepBySign(@NotNull String sign) {
         //We shift the field accordingly in one of the 4 trajectories.
         //The shift must satisfy the condition:
         // it is not an extreme shift, beyond the arrays
