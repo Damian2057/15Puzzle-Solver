@@ -4,6 +4,8 @@ import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class BreadthStrategy extends MaxDepth implements strategy {
@@ -11,6 +13,8 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
+
+    private ArrayList<Integer> hashcodes = new ArrayList<>();
 
     private StatsCollector statsCollector;
 
@@ -46,14 +50,17 @@ public class BreadthStrategy extends MaxDepth implements strategy {
             }
 
             //Calls for sequence permutations LDRU...
-            for (int i = 0; i < 4; i++) {
-                doStepBySign(String.valueOf(sequence.charAt(i)));
-            }
+                for (int i = 0; i < 4; i++) {
+                    doStepBySign(String.valueOf(sequence.charAt(i)));
+                }
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pollFirst();
             if(!allBoards.isEmpty()) {
                 recursionSolver();
+            } else {
+                statsCollector.endWithOutSollution();
+                return;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,9 +82,10 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
-                    if(!allBoards.contains(tempClone)) {
+                    if(!hashcodes.contains(tempClone.hashCode())) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
+                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -87,9 +95,10 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
-                    if(!allBoards.contains(tempClone)) {
+                    if(!hashcodes.contains(tempClone.hashCode())) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
+                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -99,9 +108,10 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
-                    if(!allBoards.contains(tempClone)) {
+                    if(!hashcodes.contains(tempClone.hashCode())) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
+                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -111,9 +121,10 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
-                    if(!allBoards.contains(tempClone)) {
+                    if(!hashcodes.contains(tempClone.hashCode())) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
+                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }

@@ -6,6 +6,8 @@ import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
 import org.example.model.PuzzleBoard;
 
+import java.util.ArrayList;
+
 public class MainApp {
 
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class MainApp {
             PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
 
             System.out.println(puzzleBoard.toString());
-            String xd = "dfs";
+            String xd = "bfs";
             switch (xd) {
                 case "bfs" -> {
                     BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
