@@ -5,6 +5,8 @@ import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
 import org.example.model.PuzzleBoard;
 
+import java.util.ArrayList;
+
 public class MainApp {
 
     public static int solutionlength;
@@ -44,7 +46,6 @@ public class MainApp {
                 {13,11,14},
                 {16,17,15}
         };
-
 
 //        try {
 //            CheckArgs.checkArguments(args);
