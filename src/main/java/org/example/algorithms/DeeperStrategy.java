@@ -42,13 +42,14 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
             //Calls for sequence permutations LDRU...
             for (int i = 0; i < 4; i++) {
+                //create only if current board if less than x iterations??
+                //check if board is already in stack?
                 doStepBySign(String.valueOf(sequence.charAt(i)));
             }
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pop();
             if(!allBoards.isEmpty() && MainApp.recursionDepth < maxDepth) {
-                System.out.println(allBoards.size());
                 recursionSolver();
             }
         } catch (Exception e) {
@@ -71,8 +72,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
-                    allBoards.push(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.push(tempClone);
+                        MainApp.processedStates++;
+                    }
                 }
             }
             case "L" -> {
@@ -81,8 +84,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
-                    allBoards.push(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.push(tempClone);
+                        MainApp.processedStates++;
+                    }
                 }
             }
             case "U" -> {
@@ -91,8 +96,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
-                    allBoards.push(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.push(tempClone);
+                        MainApp.processedStates++;
+                    }
                 }
             }
             case "D" -> {
@@ -101,8 +108,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
-                    allBoards.push(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.push(tempClone);
+                        MainApp.processedStates++;
+                    }
                 }
             }
         }

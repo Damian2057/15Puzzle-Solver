@@ -1,10 +1,8 @@
 package org.example;
 
-import org.example.Exceptions.ArgsException;
-import org.example.algorithms.AcrossStrategy;
+import org.example.algorithms.BreadthStrategy;
 import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
-import org.example.model.CheckArgs;
 import org.example.model.PuzzleBoard;
 
 public class MainApp {
@@ -63,10 +61,10 @@ public class MainApp {
             PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
 
             System.out.println(puzzleBoard.toString());
-            String xd = "dfs";
+            String xd = "bfs";
             switch (xd) {
                 case "bfs" -> {
-                    AcrossStrategy acrossStrategy = new AcrossStrategy(puzzleBoard, "RUDL");
+                    BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL");
                     System.out.println(acrossStrategy.getUtilityBoard().toString());
                 } case "dfs" -> {
                     DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"RUDL");
