@@ -14,8 +14,6 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     private PuzzleBoard utilityBoard;
     private final String sequence;
 
-    private ArrayList<Integer> hashcodes = new ArrayList<>();
-
     private StatsCollector statsCollector;
 
     public BreadthStrategy(@NotNull PuzzleBoard puzzleBoard, @NotNull String sequence, String sol, String stats) {
@@ -82,10 +80,9 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
-                    if(!hashcodes.contains(tempClone.hashCode())) {
+                    if(!allBoards.contains(tempClone)) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
-                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -95,10 +92,9 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
-                    if(!hashcodes.contains(tempClone.hashCode())) {
+                    if(!allBoards.contains(tempClone)) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
-                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -108,10 +104,9 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
-                    if(!hashcodes.contains(tempClone.hashCode())) {
+                    if(!allBoards.contains(tempClone)) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
-                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
@@ -121,10 +116,9 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
-                    if(!hashcodes.contains(tempClone.hashCode())) {
+                    if(!allBoards.contains(tempClone)) {
                         allBoards.add(tempClone);
                         statsCollector.addProcessedStates();
-                        hashcodes.add(tempClone.hashCode());
                     }
                 }
             }
