@@ -1,3 +1,5 @@
+package org.example;
+
 import org.example.algorithms.AstarStrategy;
 import org.example.algorithms.BreadthStrategy;
 import org.example.algorithms.DeeperStrategy;
