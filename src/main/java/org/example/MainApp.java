@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.algorithms.AstarStrategy;
 import org.example.algorithms.BreadthStrategy;
 import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
@@ -32,7 +33,7 @@ public class MainApp {
                     DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"LUDR","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
-                    //A* here
+                    AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"hamm","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                 } default -> {
                     System.out.println("Incorrect strategy");
                     return;

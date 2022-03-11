@@ -12,8 +12,8 @@ public class AstarStrategy {
     private PuzzleBoard utilityBoard;
 
     private ArrayList<PuzzleBoard> allBoards = new ArrayList<>();
-    private StatsCollector statsCollector;
-    private String algoritmType;
+    private final StatsCollector statsCollector;
+    private final String algoritmType;
 
     public AstarStrategy(@NotNull PuzzleBoard utilityBoard, @NotNull String algoritmType
             , String sol, String stats) {
@@ -92,7 +92,41 @@ public class AstarStrategy {
     }
 
     public void doStep() {
+        //right border = height-1
+        if(utilityBoard.getemptyYcordniate() != utilityBoard.getHeight()-1
+                && !utilityBoard.getRecentMove().equals("L")) {
+            PuzzleBoard tempClone = utilityBoard.clone();
+            tempClone.moveEmptyFieldRight();
+            statsCollector.addProcessedStates();
 
+        }
+
+        //left border = 0
+        if(utilityBoard.getemptyYcordniate() != 0
+                && !utilityBoard.getRecentMove().equals("R")) {
+            PuzzleBoard tempClone = utilityBoard.clone();
+            tempClone.moveEmptyFieldLeft();
+            statsCollector.addProcessedStates();
+
+        }
+
+        //up border = 0
+        if(utilityBoard.getemptyXcordniate() != 0
+                && !utilityBoard.getRecentMove().equals("D")) {
+            PuzzleBoard tempClone = utilityBoard.clone();
+            tempClone.moveEmptyFieldUp();
+            statsCollector.addProcessedStates();
+
+        }
+
+        //up border = width-1
+        if(utilityBoard.getemptyXcordniate() != utilityBoard.getWidth()-1
+                && !utilityBoard.getRecentMove().equals("U")) {
+            PuzzleBoard tempClone = utilityBoard.clone();
+            tempClone.moveEmptyFieldDown();
+            statsCollector.addProcessedStates();
+
+        }
 
     }
 }
