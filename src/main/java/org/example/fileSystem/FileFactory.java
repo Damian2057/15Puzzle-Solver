@@ -94,6 +94,40 @@ public class FileFactory implements AutoCloseable {
         }
     }
 
+    public static void endWithError(String solPath, String statPath) {
+        endSol(solPath);
+        endStats(statPath);
+    }
+
+    private static void endStats(String stats) {
+        try {
+            File fout = new File(stats);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write("-1");
+            bw.newLine();
+
+            bw.close();
+        } catch (IOException e) {
+        }
+    }
+
+    private static void endSol(String sol) {
+        try {
+            File fout = new File(sol);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write("-1");
+            bw.newLine();
+
+            bw.close();
+        } catch (IOException e) {
+        }
+    }
+
+
     @Override
     public void close() throws Exception {
 

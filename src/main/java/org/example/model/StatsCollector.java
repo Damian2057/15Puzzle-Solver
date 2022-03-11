@@ -48,7 +48,7 @@ public class StatsCollector {
     }
 
     public void endWithOutSollution() {
-        //save file with -1 var
+        FileFactory.endWithError(solutionPath,statisticPath);
     }
 
 }
