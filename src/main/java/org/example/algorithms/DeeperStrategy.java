@@ -1,7 +1,6 @@
 package org.example.algorithms;
 
 import org.example.Exceptions.SolutionException;
-import org.example.MainApp;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
 import org.jetbrains.annotations.NotNull;
@@ -55,9 +54,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pop();
-            if(!allBoards.isEmpty() && MainApp.recursionDepth < maxDepth) {
+            if(!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth) {
                 recursionSolver();
             }
+            statsCollector.endWithOutSollution();
         } catch (Exception e) {
             e.printStackTrace();
             throw new SolutionException("Error getting solution");
