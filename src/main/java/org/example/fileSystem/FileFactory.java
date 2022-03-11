@@ -2,8 +2,7 @@ package org.example.fileSystem;
 
 import org.example.Exceptions.FileOperationException;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,6 +52,81 @@ public class FileFactory implements AutoCloseable {
     public byte getWidth() {
         return width;
     }
+
+    public static void saveSollution(String solPath, int sollutionLenght, ArrayList<String> stepsToSolve) {
+        try {
+            File fout = new File(solPath);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write(String.valueOf(sollutionLenght));
+            bw.newLine();
+
+            for (int i = 0; i < stepsToSolve.size(); i++) {
+                bw.write(stepsToSolve.get(i)+" ");
+            }
+            bw.close();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public static void saveStats(String statPath, int sollutionLenght, int visitedStates, int processedStates, int maxDepth, double time) {
+        try {
+            File fout = new File(statPath);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write(String.valueOf(sollutionLenght));
+            bw.newLine();
+            bw.write(String.valueOf(visitedStates));
+            bw.newLine();
+            bw.write(String.valueOf(processedStates));
+            bw.newLine();
+            bw.write(String.valueOf(maxDepth));
+            bw.newLine();
+            bw.write(String.valueOf(time));
+            bw.newLine();
+
+            bw.close();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public static void endWithError(String solPath, String statPath) {
+        endSol(solPath);
+        endStats(statPath);
+    }
+
+    private static void endStats(String stats) {
+        try {
+            File fout = new File(stats);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write("-1");
+            bw.newLine();
+
+            bw.close();
+        } catch (IOException e) {
+        }
+    }
+
+    private static void endSol(String sol) {
+        try {
+            File fout = new File(sol);
+            FileOutputStream fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            bw.write("-1");
+            bw.newLine();
+
+            bw.close();
+        } catch (IOException e) {
+        }
+    }
+
 
     @Override
     public void close() throws Exception {

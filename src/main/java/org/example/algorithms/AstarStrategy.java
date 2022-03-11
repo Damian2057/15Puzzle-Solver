@@ -1,4 +1,4 @@
 package org.example.algorithms;
 
-public class BestFirstStrategy {
+public class AstarStrategy {
 }

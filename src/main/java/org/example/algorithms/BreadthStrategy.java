@@ -1,21 +1,25 @@
 package org.example.algorithms;
 
 import org.example.Exceptions.SolutionException;
-import org.example.MainApp;
 import org.example.model.PuzzleBoard;
+import org.example.model.StatsCollector;
 import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 
-public class AcrossStrategy extends MaxDepth implements strategy {
+public class BreadthStrategy extends MaxDepth implements strategy {
 
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
 
-    public AcrossStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence) {
+    private StatsCollector statsCollector;
+
+    public BreadthStrategy(@NotNull PuzzleBoard puzzleBoard, @NotNull String sequence, String sol, String stats) {
+        statsCollector = new StatsCollector(sol,stats);
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
         try {
+            statsCollector.startTime();
             recursionSolver();
         } catch (Exception e) {
             throw new SolutionException("Exp error");
@@ -29,14 +33,15 @@ public class AcrossStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-            if(MainApp.recursionDepth < utilityBoard.getStepToSolve()) {
-                MainApp.recursionDepth = utilityBoard.getStepToSolve();
+            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
+                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
             }
 
-            MainApp.visitedStates++;
+            statsCollector.addVisitedStates();
 
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
+                statsCollector.endWithSollution(utilityBoard);
                 return;
             }
 
@@ -70,8 +75,10 @@ public class AcrossStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
-                    allBoards.add(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.add(tempClone);
+                        statsCollector.addProcessedStates();
+                    }
                 }
             }
             case "L" -> {
@@ -80,8 +87,10 @@ public class AcrossStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
-                    allBoards.add(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.add(tempClone);
+                        statsCollector.addProcessedStates();
+                    }
                 }
             }
             case "U" -> {
@@ -90,8 +99,10 @@ public class AcrossStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
-                    allBoards.add(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.add(tempClone);
+                        statsCollector.addProcessedStates();
+                    }
                 }
             }
             case "D" -> {
@@ -100,8 +111,10 @@ public class AcrossStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
-                    allBoards.add(tempClone);
-                    MainApp.processedStates++;
+                    if(!allBoards.contains(tempClone)) {
+                        allBoards.add(tempClone);
+                        statsCollector.addProcessedStates();
+                    }
                 }
             }
         }

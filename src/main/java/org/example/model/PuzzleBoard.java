@@ -2,6 +2,7 @@ package org.example.model;
 
 import org.example.Exceptions.CloneException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -173,5 +174,16 @@ public class PuzzleBoard implements Cloneable {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PuzzleBoard that = (PuzzleBoard) o;
+        return Arrays.deepEquals(board, that.board);
+    }
 
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(board);
+    }
 }
