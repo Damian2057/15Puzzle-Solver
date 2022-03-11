@@ -9,44 +9,12 @@ public class MainApp {
 
     public static void main(String[] args) {
 
-        byte[][] start = { //to Test
-                {0,1,2,7},
-                {8,9,12,10},
-                {13,3,6,4},
-                {15,14,11,5}
-        };
-
-        byte[][] start3 = { //to Test
-                {1,2,4,8},
-                {5,6,3,0},
-                {9,10,7,11},
-                {13,14,15,12}
-        };
-
-        byte[][] start4 = { //to Test
-                {1,2,3,4},
-                {5,6,7,8},
-                {9,10,11,12},
-                {13,14,15,0}
-        };
-
-
-        byte[][] start2 = { //to Test
-                {0,1,3},
-                {5,2,6},
-                {4,7,9},
-                {10,8,12},
-                {13,11,14},
-                {16,17,15}
-        };
-
 //        try {
 //            CheckArgs.checkArguments(args);
 //        } catch (ArgsException e) {
 //            System.out.println(e.getMessage());
 //            return;
 //        }
-
 
         try {
             FileFactory f = new FileFactory();
@@ -61,7 +29,7 @@ public class MainApp {
                     BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(acrossStrategy.getUtilityBoard().toString());
                 } case "dfs" -> {
-                    DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
+                    DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"LUDR","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
                     //A* here
@@ -74,18 +42,5 @@ public class MainApp {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        long timeStart = 0;
-//        long timeStop = 0;
-//        timeStart = System.currentTimeMillis();
-//        double delay = ((timeStop - timeStart) / 1000) / 1000.0;
-
-//        System.out.println("Visited States: "+ visitedStates);
-//        System.out.println("Processed States: "+processedStates);
-//        System.out.println("Max depth: "+ recursionDepth);
-//        System.out.println("Solution lenght: "+deeperStrategy.getUtilityBoard().getStepToSolve());
-//        System.out.println(deeperStrategy.getUtilityBoard().getStepsToSolved().toString());
-//        System.out.println("TIME: "+delay+" ms");
-
-
     }
 }

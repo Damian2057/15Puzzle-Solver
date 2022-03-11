@@ -33,6 +33,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
+
             if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
                 statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
             }
@@ -54,10 +55,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pop();
-            if(!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth) {
+            if(!allBoards.isEmpty() && utilityBoard.getStepToSolve() < maxDepth) {
                 recursionSolver();
             }
-            statsCollector.endWithOutSollution();
+            //statsCollector.endWithOutSollution();
         } catch (Exception e) {
             e.printStackTrace();
             throw new SolutionException("Error getting solution");

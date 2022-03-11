@@ -52,4 +52,7 @@ public class StatsCollector {
         FileFactory.endWithError(solutionPath,statisticPath);
     }
 
+    public int getVisitedStates() {
+        return visitedStates;
+    }
 }
