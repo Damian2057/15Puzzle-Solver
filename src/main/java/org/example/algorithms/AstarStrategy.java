@@ -34,16 +34,30 @@ public class AstarStrategy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void recursionSolverM() {
         try {
+
+            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
+                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
+            }
+
+            statsCollector.addVisitedStates();
+
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
                 statsCollector.endWithSollution(utilityBoard);
                 return;
             }
+
+            doStep();
+
+            utilityBoard = allBoards.remove(0);
+            if(allBoards.size() != 0) {
+                recursionSolverM();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new SolutionException("Error getting solution");
@@ -52,10 +66,24 @@ public class AstarStrategy {
 
     public void recursionSolverH() {
         try {
+
+            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
+                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
+            }
+
+            statsCollector.addVisitedStates();
+
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
                 statsCollector.endWithSollution(utilityBoard);
                 return;
+            }
+
+            doStep();
+
+            utilityBoard = allBoards.remove(0);
+            if(allBoards.size() != 0) {
+                recursionSolverM();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +91,7 @@ public class AstarStrategy {
         }
     }
 
-    public void doStepBySign() {
+    public void doStep() {
 
 
     }
