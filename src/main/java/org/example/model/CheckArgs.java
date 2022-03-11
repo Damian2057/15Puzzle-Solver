@@ -14,7 +14,7 @@ public class CheckArgs {
             throw new ArgsException("Invalid count of Arguments");
         }
         if(!acronims.contains(args[0])) {
-            throw new ArgsException("Incorrect type of strategy");
+            throw new ArgsException("Incorrect type of org.example.algorithms.strategy");
         }
         if(args[1].length() != 4) {
             throw new ArgsException("Incorrect length of search order");

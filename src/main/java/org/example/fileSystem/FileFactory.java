@@ -53,7 +53,7 @@ public class FileFactory implements AutoCloseable {
         return width;
     }
 
-    public static void saveSollution(String solPath, int sollutionLenght, ArrayList<String> stepsToSolve) {
+    public static void saveSollution(String solPath, int sollutionLenght, String stepsToSolve) {
         try {
             File fout = new File(solPath);
             FileOutputStream fos = new FileOutputStream(fout);
@@ -61,10 +61,10 @@ public class FileFactory implements AutoCloseable {
 
             bw.write(String.valueOf(sollutionLenght));
             bw.newLine();
-
-            for (int i = 0; i < stepsToSolve.size(); i++) {
-                bw.write(stepsToSolve.get(i)+" ");
-            }
+            bw.write(stepsToSolve);
+//            for (int i = 0; i < stepsToSolve.size(); i++) {
+//                bw.write(stepsToSolve.get(i)+" ");
+//            }
             bw.close();
         } catch (IOException e) {
 

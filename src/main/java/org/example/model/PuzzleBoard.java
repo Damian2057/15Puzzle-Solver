@@ -1,10 +1,7 @@
 package org.example.model;
 
 import org.example.Exceptions.CloneException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public class PuzzleBoard implements Cloneable {
 
@@ -18,7 +15,7 @@ public class PuzzleBoard implements Cloneable {
     private final byte width;
     private final byte height;
 
-    private ArrayList<String> stepsToSolved = new ArrayList<>();
+    private String stepsToSolved = "";
 
     public PuzzleBoard(byte[][] board, byte width, byte height) {
         this.board = board;
@@ -59,11 +56,11 @@ public class PuzzleBoard implements Cloneable {
         return width;
     }
 
-    public ArrayList<String> getStepsToSolved() {
+    public String getStepsToSolved() {
         return stepsToSolved;
     }
 
-    public void setStepsToSolved(ArrayList<String> stepsToSolved) {
+    public void setStepsToSolved(String stepsToSolved) {
         this.stepsToSolved = stepsToSolved;
     }
 
@@ -105,7 +102,8 @@ public class PuzzleBoard implements Cloneable {
 
     public void moveEmptyFieldRight() {
         this.recentMove = "R";
-        stepsToSolved.add("R");
+        stepsToSolved +="R ";
+       // stepsToSolved.add("R");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate+1];
@@ -115,7 +113,8 @@ public class PuzzleBoard implements Cloneable {
 
     public void moveEmptyFieldLeft() {
         this.recentMove = "L";
-        stepsToSolved.add("L");
+        stepsToSolved +="L ";
+        //stepsToSolved.add("L");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate-1];
@@ -125,7 +124,8 @@ public class PuzzleBoard implements Cloneable {
 
     public void moveEmptyFieldUp() {
         this.recentMove = "U";
-        stepsToSolved.add("U");
+        stepsToSolved +="U ";
+        //stepsToSolved.add("U");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate-1][emptyYcordniate];
@@ -135,7 +135,8 @@ public class PuzzleBoard implements Cloneable {
 
     public void moveEmptyFieldDown() {
         this.recentMove = "D";
-        stepsToSolved.add("D");
+        stepsToSolved +="D ";
+        //stepsToSolved.add("D");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate+1][emptyYcordniate];
@@ -151,9 +152,9 @@ public class PuzzleBoard implements Cloneable {
             for (int i = 0; i < height; i++) {
                 System.arraycopy(this.board[i], 0, board[i], 0, width);
             }
-            ArrayList<String> copySteps = new ArrayList<>();
-            copySteps.addAll(stepsToSolved);
-            clone.setStepsToSolved(copySteps);
+//            ArrayList<String> copySteps = new ArrayList<>();
+//            copySteps.addAll(stepsToSolved);
+//            clone.setStepsToSolved(copySteps);
             clone.setBoard(board);
             return clone;
         } catch (CloneNotSupportedException e) {

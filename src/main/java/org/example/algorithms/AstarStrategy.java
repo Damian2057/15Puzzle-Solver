@@ -3,7 +3,6 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class AstarStrategy {
     private final StatsCollector statsCollector;
     private final String algoritmType;
 
-    public AstarStrategy(@NotNull PuzzleBoard utilityBoard, @NotNull String algoritmType
+    public AstarStrategy(PuzzleBoard utilityBoard, String algoritmType
             , String sol, String stats) {
         this.utilityBoard = utilityBoard;
         this.algoritmType = algoritmType;

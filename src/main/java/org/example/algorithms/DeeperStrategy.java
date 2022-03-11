@@ -3,7 +3,7 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-import org.jetbrains.annotations.NotNull;
+
 import java.util.Stack;
 
 public class DeeperStrategy extends MaxDepth implements strategy {
@@ -14,7 +14,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
     private StatsCollector statsCollector;
 
-    public DeeperStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence, String sol, String stats) {
+    public DeeperStrategy( PuzzleBoard puzzleBoard, String sequence, String sol, String stats) {
         statsCollector = new StatsCollector(sol,stats);
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
@@ -66,7 +66,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     }
 
     @Override
-    public void doStepBySign(@NotNull String sign) {
+    public void doStepBySign( String sign) {
         //We shift the field accordingly in one of the 4 trajectories.
         //The shift must satisfy the condition:
         // it is not an extreme shift, beyond the arrays
@@ -79,10 +79,8 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("L")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldRight();
-                    if(!allBoards.contains(tempClone)) {
-                        allBoards.push(tempClone);
-                        statsCollector.addProcessedStates();
-                    }
+                    allBoards.push(tempClone);
+                    statsCollector.addProcessedStates();
                 }
             }
             case "L" -> {
@@ -91,10 +89,8 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("R")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldLeft();
-                    if(!allBoards.contains(tempClone)) {
-                        allBoards.push(tempClone);
-                        statsCollector.addProcessedStates();
-                    }
+                    allBoards.push(tempClone);
+                    statsCollector.addProcessedStates();
                 }
             }
             case "U" -> {
@@ -103,10 +99,8 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("D")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldUp();
-                    if(!allBoards.contains(tempClone)) {
-                        allBoards.push(tempClone);
-                        statsCollector.addProcessedStates();
-                    }
+                    allBoards.push(tempClone);
+                    statsCollector.addProcessedStates();
                 }
             }
             case "D" -> {
@@ -115,10 +109,8 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                         && !utilityBoard.getRecentMove().equals("U")) {
                     PuzzleBoard tempClone = utilityBoard.clone();
                     tempClone.moveEmptyFieldDown();
-                    if(!allBoards.contains(tempClone)) {
-                        allBoards.push(tempClone);
-                        statsCollector.addProcessedStates();
-                    }
+                    allBoards.push(tempClone);
+                    statsCollector.addProcessedStates();
                 }
             }
         }

@@ -1,6 +1,5 @@
 package org.example.model;
 
-import org.example.MainApp;
 import org.example.fileSystem.FileFactory;
 
 public class StatsCollector {

@@ -1,20 +1,16 @@
-package org.example;
-
 import org.example.algorithms.AstarStrategy;
 import org.example.algorithms.BreadthStrategy;
 import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
 import org.example.model.PuzzleBoard;
 
-import java.util.ArrayList;
-
 public class MainApp {
 
     public static void main(String[] args) {
 
 //        try {
-//            CheckArgs.checkArguments(args);
-//        } catch (ArgsException e) {
+//            org.example.model.CheckArgs.checkArguments(args);
+//        } catch (org.example.Exceptions.ArgsException e) {
 //            System.out.println(e.getMessage());
 //            return;
 //        }
@@ -37,7 +33,7 @@ public class MainApp {
                 } case "astr" -> {
                     AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"hamm","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                 } default -> {
-                    System.out.println("Incorrect strategy");
+                    System.out.println("Incorrect org.example.algorithms.strategy");
                     return;
                 }
             }
