@@ -3,6 +3,7 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.MainApp;
 import org.example.model.PuzzleBoard;
+import org.example.model.StatsCollector;
 import org.jetbrains.annotations.NotNull;
 import java.util.Stack;
 
@@ -12,10 +13,14 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     private PuzzleBoard utilityBoard;
     private final String sequence;
 
-    public DeeperStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence) {
+    private StatsCollector statsCollector;
+
+    public DeeperStrategy(@NotNull PuzzleBoard puzzleBoard,@NotNull String sequence, String sol, String stats) {
+        statsCollector = new StatsCollector(sol,stats);
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
         try {
+            statsCollector.startTime();
             recursionSolver();
         } catch (Exception e) {
             throw new SolutionException("Exp error");
@@ -29,14 +34,15 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-            if(MainApp.recursionDepth < utilityBoard.getStepToSolve()) {
-                MainApp.recursionDepth = utilityBoard.getStepToSolve();
+            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
+                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
             }
 
-            MainApp.visitedStates++;
+            statsCollector.addVisitedStates();
 
             if(utilityBoard.checkValidation()) {
                 //checking if the board is already solved
+                statsCollector.endWithSollution(utilityBoard);
                 return;
             }
 
@@ -74,7 +80,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                     tempClone.moveEmptyFieldRight();
                     if(!allBoards.contains(tempClone)) {
                         allBoards.push(tempClone);
-                        MainApp.processedStates++;
+                        statsCollector.addProcessedStates();
                     }
                 }
             }
@@ -86,7 +92,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                     tempClone.moveEmptyFieldLeft();
                     if(!allBoards.contains(tempClone)) {
                         allBoards.push(tempClone);
-                        MainApp.processedStates++;
+                        statsCollector.addProcessedStates();
                     }
                 }
             }
@@ -98,7 +104,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                     tempClone.moveEmptyFieldUp();
                     if(!allBoards.contains(tempClone)) {
                         allBoards.push(tempClone);
-                        MainApp.processedStates++;
+                        statsCollector.addProcessedStates();
                     }
                 }
             }
@@ -110,7 +116,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                     tempClone.moveEmptyFieldDown();
                     if(!allBoards.contains(tempClone)) {
                         allBoards.push(tempClone);
-                        MainApp.processedStates++;
+                        statsCollector.addProcessedStates();
                     }
                 }
             }

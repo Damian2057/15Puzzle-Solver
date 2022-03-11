@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.MainApp;
 import org.example.fileSystem.FileFactory;
 
 public class StatsCollector {
@@ -41,7 +42,7 @@ public class StatsCollector {
     }
 
     public void endWithSollution(PuzzleBoard board) {
-        time = ((System.nanoTime() - startTime)/1000.0)/1000.0;
+        time = Math.round((System.nanoTime() - startTime)/1000.0)/1000.0;
         stepsToSolve = board.getStepToSolve();
         FileFactory.saveSollution(solutionPath,board.getStepToSolve(),board.getStepsToSolved());
         FileFactory.saveStats(statisticPath,board.getStepToSolve(),visitedStates,processedStates,recursionDepth,time);

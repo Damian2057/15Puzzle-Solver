@@ -5,8 +5,6 @@ import org.example.algorithms.DeeperStrategy;
 import org.example.fileSystem.FileFactory;
 import org.example.model.PuzzleBoard;
 
-import java.util.ArrayList;
-
 public class MainApp {
 
     public static int solutionlength;
@@ -65,10 +63,10 @@ public class MainApp {
             String xd = "bfs";
             switch (xd) {
                 case "bfs" -> {
-                    BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","xd","xd");
+                    BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(acrossStrategy.getUtilityBoard().toString());
                 } case "dfs" -> {
-                    DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"RUDL");
+                    DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
                     //A* here
