@@ -62,18 +62,19 @@ public class FileFactory implements AutoCloseable {
             bw.write(String.valueOf(sollutionLenght));
             bw.newLine();
             bw.write(stepsToSolve);
-//            for (int i = 0; i < stepsToSolve.size(); i++) {
-//                bw.write(stepsToSolve.get(i)+" ");
-//            }
             bw.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     public static void saveStats(String statPath, int sollutionLenght, int visitedStates, int processedStates, int maxDepth, double time) {
         try {
             File fout = new File(statPath);
+            if(!fout.exists()) {
+                System.out.println(fout.getAbsolutePath());
+                System.out.println(fout.createNewFile());
+            }
             FileOutputStream fos = new FileOutputStream(fout);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
@@ -90,7 +91,7 @@ public class FileFactory implements AutoCloseable {
 
             bw.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 

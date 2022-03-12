@@ -52,7 +52,7 @@ public class BreadthStrategy extends MaxDepth implements strategy {
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pollFirst();
-            if(!allBoards.isEmpty()) {
+            if(!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth) {
                 recursionSolver();
             } else {
                 statsCollector.endWithOutSollution();

@@ -58,7 +58,15 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             if(!allBoards.isEmpty() && utilityBoard.getStepToSolve() < maxDepth) {
                 recursionSolver();
             }
-            //statsCollector.endWithOutSollution();
+            try {
+                this.utilityBoard = allBoards.pop();
+                recursionSolver();
+            } catch (Exception e) {
+
+            }
+            if(allBoards.isEmpty()) {
+                statsCollector.endWithOutSollution();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new SolutionException("Error getting solution");
