@@ -27,10 +27,12 @@ public class AstarStrategy {
                 case "hamm" -> {
                     statsCollector.startTime();
                     recursionSolverH();
+                } default -> {
+                    throw new SolutionException("Wrong alg Type");
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new SolutionException("Error occurred during getting a solution");
         }
     }
 
@@ -150,10 +152,27 @@ public class AstarStrategy {
     }
 
     private void manhOrder(PuzzleBoard board) {
-
+        //a special type of add-on
     }
 
     private void hammOrder(PuzzleBoard board) {
+        boolean flag = true;
+        int iterator = allBoards.size(); //it increases the speed the size function is not called every time
+        for (int i = 0; i < iterator; i++) {
+            //check hammingScore(how many points do not fit into place)
+            //depending on the result set the object in the right place
+            //the best solutions are listed first and will be analyzed first
+            if (board.hammingScore() < allBoards.get(i).hammingScore()) {
+                allBoards.add(i, board);
+                flag = false;
+            }
+        }
+        if (flag) {
+            allBoards.add(board);
+        }
+    }
 
+    public PuzzleBoard getUtilityBoard() {
+        return utilityBoard;
     }
 }

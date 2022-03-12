@@ -8,13 +8,10 @@ public class PuzzleBoard implements Cloneable {
     private byte[][] board;
     private String recentMove = "NONE";
     private int stepToSolve = 0;
-
     private int emptyXcordniate;
     private int emptyYcordniate;
-
     private final byte width;
     private final byte height;
-
     private String stepsToSolved = "";
 
     public PuzzleBoard(byte[][] board, byte width, byte height) {
@@ -180,5 +177,24 @@ public class PuzzleBoard implements Cloneable {
     @Override
     public int hashCode() {
         return Arrays.deepHashCode(board);
+    }
+
+    public int manhattanScore() {
+        //sum of the distance of the points from their correct positions
+        return 0;
+    }
+
+    public int hammingScore() {
+        //The sum of the number of points not in their positions
+        byte[][] tempBoard = generateSolvedBoard();
+        int sum = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (tempBoard[i][j] != this.board[i][j]) {
+                    sum += 1;
+                }
+            }
+        }
+        return sum;
     }
 }
