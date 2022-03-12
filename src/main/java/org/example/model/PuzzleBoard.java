@@ -2,7 +2,6 @@ package org.example.model;
 
 import org.example.Exceptions.CloneException;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class PuzzleBoard implements Cloneable {
 
@@ -57,10 +56,6 @@ public class PuzzleBoard implements Cloneable {
 
     public String getStepsToSolved() {
         return stepsToSolved;
-    }
-
-    public void setStepsToSolved(String stepsToSolved) {
-        this.stepsToSolved = stepsToSolved;
     }
 
     @Override

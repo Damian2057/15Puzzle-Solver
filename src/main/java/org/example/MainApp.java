@@ -23,7 +23,7 @@ public class MainApp {
             PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
 
             System.out.println(puzzleBoard.toString());
-            String xd = "astr";
+            String xd = "bfs";
             switch (xd) {
                 case "bfs" -> {
                     BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
