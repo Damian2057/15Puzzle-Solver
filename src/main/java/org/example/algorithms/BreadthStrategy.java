@@ -10,7 +10,7 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
-    private StatsCollector statsCollector;
+    private final StatsCollector statsCollector;
 
     public BreadthStrategy( PuzzleBoard puzzleBoard,  String sequence, String sol, String stats) {
         statsCollector = new StatsCollector(sol,stats);
@@ -31,8 +31,8 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
-                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
             }
 
             statsCollector.addVisitedStates();

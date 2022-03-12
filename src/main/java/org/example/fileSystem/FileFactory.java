@@ -10,7 +10,7 @@ public class FileFactory implements AutoCloseable {
 
     private byte height = 0;
     private byte width = 0;
-    private List<Byte> valueList = new ArrayList<>();
+    private final List<Byte> valueList = new ArrayList<>();
 
     public byte[][] getPuzzle(String path) throws IOException {
         File file = new File(path);
@@ -36,8 +36,8 @@ public class FileFactory implements AutoCloseable {
     private void parseData(String str) {
         Scanner lineScanner = new Scanner(str).useDelimiter(" ");
         if(height == 0 && width == 0) {
-            this.height = Byte.valueOf(lineScanner.next());
-            this.width = Byte.valueOf(lineScanner.next());
+            this.height = Byte.parseByte(lineScanner.next());
+            this.width = Byte.parseByte(lineScanner.next());
         }
         while (lineScanner.hasNext()) {
             valueList.add(Byte.valueOf(lineScanner.next()));
@@ -109,7 +109,7 @@ public class FileFactory implements AutoCloseable {
             bw.newLine();
 
             bw.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -123,7 +123,7 @@ public class FileFactory implements AutoCloseable {
             bw.newLine();
 
             bw.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 

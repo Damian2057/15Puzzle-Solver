@@ -20,7 +20,6 @@ public class MainApp {
         try {
             FileFactory f = new FileFactory();
             byte[][] board = f.getPuzzle("C:\\Users\\Damian\\Desktop\\test.txt");
-
             PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
 
             System.out.println(puzzleBoard.toString());

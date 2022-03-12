@@ -40,9 +40,9 @@ public class StatsCollector {
 
     public void endWithSollution(PuzzleBoard board) {
         time = Math.round((System.nanoTime() - startTime)/1000.0)/1000.0;
-        stepsToSolve = board.getStepToSolve();
-        FileFactory.saveSollution(solutionPath,board.getStepToSolve(),board.getStepsToSolved());
-        FileFactory.saveStats(statisticPath,board.getStepToSolve(),visitedStates,processedStates,recursionDepth,time);
+        stepsToSolve = board.getCountOfSteps();
+        FileFactory.saveSollution(solutionPath,board.getCountOfSteps(),board.getStepsToSolved());
+        FileFactory.saveStats(statisticPath,board.getCountOfSteps(),visitedStates,processedStates,recursionDepth,time);
     }
 
     public void endWithOutSollution() {

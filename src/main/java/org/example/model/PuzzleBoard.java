@@ -8,8 +8,8 @@ public class PuzzleBoard implements Cloneable {
     private byte[][] board;
     private String recentMove = "NONE";
     private int stepToSolve = 0;
-    private int emptyXcordniate;
-    private int emptyYcordniate;
+    private byte emptyXcordniate;
+    private byte emptyYcordniate;
     private final byte width;
     private final byte height;
     private String stepsToSolved = "";
@@ -21,8 +21,8 @@ public class PuzzleBoard implements Cloneable {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (board[i][j] == 0) {
-                    emptyXcordniate = i;
-                    emptyYcordniate = j;
+                    emptyXcordniate = (byte) i;
+                    emptyYcordniate = (byte) j;
                 }
             }
         }
@@ -44,12 +44,12 @@ public class PuzzleBoard implements Cloneable {
     //When declaring, we first give the number of rows, then columns
     //So for ours, width is the number of columns and height is the number of lines.
 
-    public int getWidth() {
+    public byte getWidth() {
         //count of rows
         return height;
     }
 
-    public int getHeight() {
+    public byte getHeight() {
         //count of columns
         return width;
     }
@@ -78,11 +78,11 @@ public class PuzzleBoard implements Cloneable {
         return stringBuilder.toString();
     }
 
-    public int getemptyXcordniate() {
+    public byte getemptyXcordniate() {
         return emptyXcordniate;
     }
 
-    public int getemptyYcordniate() {
+    public byte getemptyYcordniate() {
         return emptyYcordniate;
     }
 
@@ -90,7 +90,7 @@ public class PuzzleBoard implements Cloneable {
         return recentMove;
     }
 
-    public int getStepToSolve() {
+    public int getCountOfSteps() {
         return stepToSolve;
     }
 
@@ -105,7 +105,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate+1];
         this.board[emptyXcordniate][emptyYcordniate+1] = 0;
-        emptyYcordniate = emptyYcordniate + 1;
+        emptyYcordniate = (byte) (emptyYcordniate + 1);
     }
 
     public void moveEmptyFieldLeft() {
@@ -115,7 +115,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate-1];
         this.board[emptyXcordniate][emptyYcordniate-1] = 0;
-        emptyYcordniate = emptyYcordniate - 1;
+        emptyYcordniate = (byte) (emptyYcordniate - 1);
     }
 
     public void moveEmptyFieldUp() {
@@ -125,7 +125,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate-1][emptyYcordniate];
         this.board[emptyXcordniate-1][emptyYcordniate] = 0;
-        emptyXcordniate = emptyXcordniate - 1;
+        emptyXcordniate = (byte) (emptyXcordniate - 1);
     }
 
     public void moveEmptyFieldDown() {
@@ -135,7 +135,7 @@ public class PuzzleBoard implements Cloneable {
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate+1][emptyYcordniate];
         this.board[emptyXcordniate+1][emptyYcordniate] = 0;
-        emptyXcordniate = emptyXcordniate + 1;
+        emptyXcordniate = (byte) (emptyXcordniate + 1);
     }
 
     @Override

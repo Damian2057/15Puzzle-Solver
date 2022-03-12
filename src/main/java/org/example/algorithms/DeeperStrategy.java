@@ -10,7 +10,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     private final Stack<PuzzleBoard> allBoards = new Stack<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
-    private StatsCollector statsCollector;
+    private final StatsCollector statsCollector;
 
     public DeeperStrategy( PuzzleBoard puzzleBoard, String sequence, String sol, String stats) {
         statsCollector = new StatsCollector(sol,stats);
@@ -32,8 +32,8 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     public void recursionSolver() {
         try {
 
-            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
-                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
             }
 
             statsCollector.addVisitedStates();
@@ -53,7 +53,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pop();
-            if(!allBoards.isEmpty() && utilityBoard.getStepToSolve() < maxDepth) {
+            if(!allBoards.isEmpty() && utilityBoard.getCountOfSteps() < maxDepth) {
                 recursionSolver();
             }
             try {
