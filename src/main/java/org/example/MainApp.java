@@ -32,10 +32,10 @@ public class MainApp {
                     DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"LUDR","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
-                    AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"hamm","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
+                    AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"manh","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(astarStrategy.getUtilityBoard().toString());
                 } default -> {
-                    System.out.println("Incorrect org.example.algorithms.strategy");
+                    System.out.println("Incorrect algorithms.strategy");
                     return;
                 }
             }

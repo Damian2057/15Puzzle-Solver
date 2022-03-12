@@ -2,6 +2,7 @@ package org.example.model;
 
 import org.example.Exceptions.CloneException;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class PuzzleBoard implements Cloneable {
 
@@ -181,7 +182,28 @@ public class PuzzleBoard implements Cloneable {
 
     public int manhattanScore() {
         //sum of the distance of the points from their correct positions
-        return 0;
+        byte[][] tempBoard = generateSolvedBoard();
+        int sum = 0;
+        byte index = 1;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if(board[i][j] == index){
+                    index++;
+                } else {
+                    boolean flag = false;
+                    for (int z = 0; z < height && !flag; z++) {
+                        for (int k = 0; k < width && !flag ; k++) {
+                            if(board[z][k] == index) {
+                                sum = sum + Math.abs(z-i)+Math.abs(k-j);
+                                index++;
+                                flag = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     public int hammingScore() {
