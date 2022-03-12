@@ -3,7 +3,6 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-
 import java.util.LinkedList;
 
 public class BreadthStrategy extends MaxDepth implements strategy {
@@ -11,7 +10,6 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
-
     private StatsCollector statsCollector;
 
     public BreadthStrategy( PuzzleBoard puzzleBoard,  String sequence, String sol, String stats) {

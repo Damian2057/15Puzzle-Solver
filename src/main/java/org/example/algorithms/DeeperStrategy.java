@@ -3,7 +3,6 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-
 import java.util.Stack;
 
 public class DeeperStrategy extends MaxDepth implements strategy {
@@ -11,7 +10,6 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     private final Stack<PuzzleBoard> allBoards = new Stack<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
-
     private StatsCollector statsCollector;
 
     public DeeperStrategy( PuzzleBoard puzzleBoard, String sequence, String sol, String stats) {

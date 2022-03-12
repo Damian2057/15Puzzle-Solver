@@ -9,9 +9,7 @@ public class StatsCollector {
     private int recursionDepth = 0;
     private long startTime;
     private int stepsToSolve;
-
     private double time = 0;
-
     private final String solutionPath;
     private final String statisticPath;
 

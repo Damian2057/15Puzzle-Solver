@@ -3,13 +3,12 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AstarStrategy {
 
     private PuzzleBoard utilityBoard;
-
     private ArrayList<PuzzleBoard> allBoards = new ArrayList<>();
     private final StatsCollector statsCollector;
     private final String algoritmType;
@@ -52,7 +51,9 @@ public class AstarStrategy {
 
             doStep();
 
-            utilityBoard = allBoards.remove(0);
+            utilityBoard = allBoards.get(0);
+            allBoards.remove(0);
+
             if(allBoards.size() != 0) {
                 recursionSolverM();
             }
@@ -80,7 +81,10 @@ public class AstarStrategy {
 
             doStep();
 
-            utilityBoard = allBoards.remove(0);
+            //get current best element to analyze
+            utilityBoard = allBoards.get(0);
+            allBoards.remove(0);
+
             if(allBoards.size() != 0) {
                 recursionSolverM();
             }
@@ -97,6 +101,11 @@ public class AstarStrategy {
             PuzzleBoard tempClone = utilityBoard.clone();
             tempClone.moveEmptyFieldRight();
             statsCollector.addProcessedStates();
+            if(Objects.equals(algoritmType, "manh")) {
+                manhOrder(tempClone);
+            } else {
+                hammOrder(tempClone);
+            }
 
         }
 
@@ -106,7 +115,11 @@ public class AstarStrategy {
             PuzzleBoard tempClone = utilityBoard.clone();
             tempClone.moveEmptyFieldLeft();
             statsCollector.addProcessedStates();
-
+            if(Objects.equals(algoritmType, "manh")) {
+                manhOrder(tempClone);
+            } else {
+                hammOrder(tempClone);
+            }
         }
 
         //up border = 0
@@ -115,7 +128,11 @@ public class AstarStrategy {
             PuzzleBoard tempClone = utilityBoard.clone();
             tempClone.moveEmptyFieldUp();
             statsCollector.addProcessedStates();
-
+            if(Objects.equals(algoritmType, "manh")) {
+                manhOrder(tempClone);
+            } else {
+                hammOrder(tempClone);
+            }
         }
 
         //up border = width-1
@@ -124,8 +141,19 @@ public class AstarStrategy {
             PuzzleBoard tempClone = utilityBoard.clone();
             tempClone.moveEmptyFieldDown();
             statsCollector.addProcessedStates();
-
+            if(Objects.equals(algoritmType, "manh")) {
+                manhOrder(tempClone);
+            } else {
+                hammOrder(tempClone);
+            }
         }
+    }
+
+    private void manhOrder(PuzzleBoard board) {
+
+    }
+
+    private void hammOrder(PuzzleBoard board) {
 
     }
 }

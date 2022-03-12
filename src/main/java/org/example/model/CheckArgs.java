@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class CheckArgs {
 
     public static void checkArguments(String[] args) {
+
         ArrayList<String> acronims = new ArrayList<>();
         acronims.add("dfs");
         acronims.add("bfs");
         acronims.add("astr");
+
         if(args.length != 5) {
             throw new ArgsException("Invalid count of Arguments");
         }

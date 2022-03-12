@@ -43,6 +43,7 @@ public class PuzzleBoard implements Cloneable {
         tempBoard[this.height -1][width-1] = 0;
         return tempBoard;
     }
+    
     //When declaring, we first give the number of rows, then columns
     //So for ours, width is the number of columns and height is the number of lines.
 
@@ -103,7 +104,6 @@ public class PuzzleBoard implements Cloneable {
     public void moveEmptyFieldRight() {
         this.recentMove = "R";
         stepsToSolved +="R ";
-       // stepsToSolved.add("R");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate+1];
@@ -114,7 +114,6 @@ public class PuzzleBoard implements Cloneable {
     public void moveEmptyFieldLeft() {
         this.recentMove = "L";
         stepsToSolved +="L ";
-        //stepsToSolved.add("L");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate-1];
@@ -125,7 +124,6 @@ public class PuzzleBoard implements Cloneable {
     public void moveEmptyFieldUp() {
         this.recentMove = "U";
         stepsToSolved +="U ";
-        //stepsToSolved.add("U");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate-1][emptyYcordniate];
@@ -136,7 +134,6 @@ public class PuzzleBoard implements Cloneable {
     public void moveEmptyFieldDown() {
         this.recentMove = "D";
         stepsToSolved +="D ";
-        //stepsToSolved.add("D");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate+1][emptyYcordniate];
@@ -152,9 +149,6 @@ public class PuzzleBoard implements Cloneable {
             for (int i = 0; i < height; i++) {
                 System.arraycopy(this.board[i], 0, board[i], 0, width);
             }
-//            ArrayList<String> copySteps = new ArrayList<>();
-//            copySteps.addAll(stepsToSolved);
-//            clone.setStepsToSolved(copySteps);
             clone.setBoard(board);
             return clone;
         } catch (CloneNotSupportedException e) {
