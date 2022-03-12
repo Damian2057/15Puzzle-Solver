@@ -1,7 +1,6 @@
 package org.example.fileSystem;
 
 import org.example.Exceptions.FileOperationException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class FileFactory implements AutoCloseable {
 
     private byte height = 0;
     private byte width = 0;
-    private List<Byte> valueList = new ArrayList<>();
+    private final List<Byte> valueList = new ArrayList<>();
 
     public byte[][] getPuzzle(String path) throws IOException {
         File file = new File(path);
@@ -37,8 +36,8 @@ public class FileFactory implements AutoCloseable {
     private void parseData(String str) {
         Scanner lineScanner = new Scanner(str).useDelimiter(" ");
         if(height == 0 && width == 0) {
-            this.height = Byte.valueOf(lineScanner.next());
-            this.width = Byte.valueOf(lineScanner.next());
+            this.height = Byte.parseByte(lineScanner.next());
+            this.width = Byte.parseByte(lineScanner.next());
         }
         while (lineScanner.hasNext()) {
             valueList.add(Byte.valueOf(lineScanner.next()));
@@ -62,18 +61,19 @@ public class FileFactory implements AutoCloseable {
             bw.write(String.valueOf(sollutionLenght));
             bw.newLine();
             bw.write(stepsToSolve);
-//            for (int i = 0; i < stepsToSolve.size(); i++) {
-//                bw.write(stepsToSolve.get(i)+" ");
-//            }
             bw.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     public static void saveStats(String statPath, int sollutionLenght, int visitedStates, int processedStates, int maxDepth, double time) {
         try {
             File fout = new File(statPath);
+            if(!fout.exists()) {
+                System.out.println(fout.getAbsolutePath());
+                System.out.println(fout.createNewFile());
+            }
             FileOutputStream fos = new FileOutputStream(fout);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
@@ -90,7 +90,7 @@ public class FileFactory implements AutoCloseable {
 
             bw.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -109,7 +109,7 @@ public class FileFactory implements AutoCloseable {
             bw.newLine();
 
             bw.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -123,7 +123,7 @@ public class FileFactory implements AutoCloseable {
             bw.newLine();
 
             bw.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 

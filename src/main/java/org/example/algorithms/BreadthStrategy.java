@@ -3,7 +3,6 @@ package org.example.algorithms;
 import org.example.Exceptions.SolutionException;
 import org.example.model.PuzzleBoard;
 import org.example.model.StatsCollector;
-
 import java.util.LinkedList;
 
 public class BreadthStrategy extends MaxDepth implements strategy {
@@ -11,8 +10,7 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     private final LinkedList<PuzzleBoard> allBoards = new LinkedList<>();
     private PuzzleBoard utilityBoard;
     private final String sequence;
-
-    private StatsCollector statsCollector;
+    private final StatsCollector statsCollector;
 
     public BreadthStrategy( PuzzleBoard puzzleBoard,  String sequence, String sol, String stats) {
         statsCollector = new StatsCollector(sol,stats);
@@ -33,8 +31,8 @@ public class BreadthStrategy extends MaxDepth implements strategy {
     @Override
     public void recursionSolver() {
         try {
-            if(statsCollector.getRecursionDepth() < utilityBoard.getStepToSolve()) {
-                statsCollector.setRecursionDepth(utilityBoard.getStepToSolve());
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
             }
 
             statsCollector.addVisitedStates();
@@ -52,7 +50,7 @@ public class BreadthStrategy extends MaxDepth implements strategy {
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
             this.utilityBoard = allBoards.pollFirst();
-            if(!allBoards.isEmpty()) {
+            if(!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth) {
                 recursionSolver();
             } else {
                 statsCollector.endWithOutSollution();

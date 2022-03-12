@@ -2,19 +2,17 @@ package org.example.model;
 
 import org.example.Exceptions.CloneException;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class PuzzleBoard implements Cloneable {
 
     private byte[][] board;
     private String recentMove = "NONE";
     private int stepToSolve = 0;
-
-    private int emptyXcordniate;
-    private int emptyYcordniate;
-
+    private byte emptyXcordniate;
+    private byte emptyYcordniate;
     private final byte width;
     private final byte height;
-
     private String stepsToSolved = "";
 
     public PuzzleBoard(byte[][] board, byte width, byte height) {
@@ -24,8 +22,8 @@ public class PuzzleBoard implements Cloneable {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (board[i][j] == 0) {
-                    emptyXcordniate = i;
-                    emptyYcordniate = j;
+                    emptyXcordniate = (byte) i;
+                    emptyYcordniate = (byte) j;
                 }
             }
         }
@@ -43,15 +41,16 @@ public class PuzzleBoard implements Cloneable {
         tempBoard[this.height -1][width-1] = 0;
         return tempBoard;
     }
+    
     //When declaring, we first give the number of rows, then columns
     //So for ours, width is the number of columns and height is the number of lines.
 
-    public int getWidth() {
+    public byte getWidth() {
         //count of rows
         return height;
     }
 
-    public int getHeight() {
+    public byte getHeight() {
         //count of columns
         return width;
     }
@@ -80,11 +79,11 @@ public class PuzzleBoard implements Cloneable {
         return stringBuilder.toString();
     }
 
-    public int getemptyXcordniate() {
+    public byte getemptyXcordniate() {
         return emptyXcordniate;
     }
 
-    public int getemptyYcordniate() {
+    public byte getemptyYcordniate() {
         return emptyYcordniate;
     }
 
@@ -92,7 +91,7 @@ public class PuzzleBoard implements Cloneable {
         return recentMove;
     }
 
-    public int getStepToSolve() {
+    public int getCountOfSteps() {
         return stepToSolve;
     }
 
@@ -103,45 +102,41 @@ public class PuzzleBoard implements Cloneable {
     public void moveEmptyFieldRight() {
         this.recentMove = "R";
         stepsToSolved +="R ";
-       // stepsToSolved.add("R");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate+1];
         this.board[emptyXcordniate][emptyYcordniate+1] = 0;
-        emptyYcordniate = emptyYcordniate + 1;
+        emptyYcordniate = (byte) (emptyYcordniate + 1);
     }
 
     public void moveEmptyFieldLeft() {
         this.recentMove = "L";
         stepsToSolved +="L ";
-        //stepsToSolved.add("L");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate][emptyYcordniate-1];
         this.board[emptyXcordniate][emptyYcordniate-1] = 0;
-        emptyYcordniate = emptyYcordniate - 1;
+        emptyYcordniate = (byte) (emptyYcordniate - 1);
     }
 
     public void moveEmptyFieldUp() {
         this.recentMove = "U";
         stepsToSolved +="U ";
-        //stepsToSolved.add("U");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate-1][emptyYcordniate];
         this.board[emptyXcordniate-1][emptyYcordniate] = 0;
-        emptyXcordniate = emptyXcordniate - 1;
+        emptyXcordniate = (byte) (emptyXcordniate - 1);
     }
 
     public void moveEmptyFieldDown() {
         this.recentMove = "D";
         stepsToSolved +="D ";
-        //stepsToSolved.add("D");
         stepToSolve++;
         this.board[emptyXcordniate][emptyYcordniate]
                 = this.board[emptyXcordniate+1][emptyYcordniate];
         this.board[emptyXcordniate+1][emptyYcordniate] = 0;
-        emptyXcordniate = emptyXcordniate + 1;
+        emptyXcordniate = (byte) (emptyXcordniate + 1);
     }
 
     @Override
@@ -152,9 +147,6 @@ public class PuzzleBoard implements Cloneable {
             for (int i = 0; i < height; i++) {
                 System.arraycopy(this.board[i], 0, board[i], 0, width);
             }
-//            ArrayList<String> copySteps = new ArrayList<>();
-//            copySteps.addAll(stepsToSolved);
-//            clone.setStepsToSolved(copySteps);
             clone.setBoard(board);
             return clone;
         } catch (CloneNotSupportedException e) {
@@ -186,5 +178,45 @@ public class PuzzleBoard implements Cloneable {
     @Override
     public int hashCode() {
         return Arrays.deepHashCode(board);
+    }
+
+    public int manhattanScore() {
+        //sum of the distance of the points from their correct positions
+        byte[][] tempBoard = generateSolvedBoard();
+        int sum = 0;
+        byte index = 1;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if(board[i][j] == index){
+                    index++;
+                } else {
+                    boolean flag = false;
+                    for (int z = 0; z < height && !flag; z++) {
+                        for (int k = 0; k < width && !flag ; k++) {
+                            if(board[z][k] == index) {
+                                sum = sum + Math.abs(z-i)+Math.abs(k-j);
+                                index++;
+                                flag = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+    public int hammingScore() {
+        //The sum of the number of points not in their positions
+        byte[][] tempBoard = generateSolvedBoard();
+        int sum = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (tempBoard[i][j] != this.board[i][j]) {
+                    sum += 1;
+                }
+            }
+        }
+        return sum;
     }
 }
