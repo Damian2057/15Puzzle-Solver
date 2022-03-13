@@ -2,7 +2,7 @@
 
 To run the compiled jar program the following parameters must be provided:
 
-java -jar fifteenPuzzle-1.0-SNAPSHOT.jar <strategy> <additional parameters> <source_file.txt> <solution_file.txt> <statistic_file.txt>
+java -jar fifteenPuzzle-1.0-SNAPSHOT.jar` <strategy> <additional parameters> <source_file.txt> <solution_file.txt> <statistic_file.txt>`
   
 | Available strategies    | Strategy_Acronym                         |
 | ----------------------- | ---------------------------------------- |
