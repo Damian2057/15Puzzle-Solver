@@ -26,3 +26,5 @@ java -jar fifteenPuzzle-1.0-SNAPSHOT.jar <strategy> <additional parameters> <sou
   <solution_file.txt> - path to the txt file in which the statistics, number of step, visited states, processed states, recursion depth, Duration will be saved
 
   *If a solution is unsuccessful, the number -1 is written to the files
+    
+  *In most cases the program requires an increase in the stack and available memory
