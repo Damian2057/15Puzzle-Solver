@@ -18,6 +18,9 @@ public class AstarStrategy extends MaxDepth {
         this.utilityBoard = utilityBoard;
         this.algorithmType = algoritmType;
         statsCollector = new StatsCollector(sol,stats);
+
+        statsCollector.endWithOutSollution();
+
         try {
             switch (algoritmType) {
                 case "manh" -> {

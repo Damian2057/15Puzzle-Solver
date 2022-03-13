@@ -16,6 +16,9 @@ public class BreadthStrategy extends MaxDepth implements strategy {
         statsCollector = new StatsCollector(sol,stats);
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
+
+        statsCollector.endWithOutSollution();
+
         try {
             statsCollector.startTime();
             recursionSolver();
