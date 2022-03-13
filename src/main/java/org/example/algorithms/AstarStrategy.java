@@ -82,6 +82,7 @@ public class AstarStrategy extends MaxDepth {
             statsCollector.addVisitedStates();
 
             if(utilityBoard.checkValidation()) {
+                System.out.println(statsCollector.getRecursionDepth());
                 //checking if the board is already solved
                 statsCollector.endWithSollution(utilityBoard);
                 return;

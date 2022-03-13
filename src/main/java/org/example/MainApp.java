@@ -23,7 +23,7 @@ public class MainApp {
             PuzzleBoard puzzleBoard = new PuzzleBoard(board, f.getWidth() , f.getHeight());
 
             System.out.println(puzzleBoard.toString());
-            String xd = "bfs";
+            String xd = "astr";
             switch (xd) {
                 case "bfs" -> {
                     BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, "RUDL","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
@@ -32,7 +32,7 @@ public class MainApp {
                     DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,"LUDR","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
-                    AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"manh","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
+                    AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,"hamm","C:\\Users\\Damian\\Desktop\\sol.txt","C:\\Users\\Damian\\Desktop\\sts.txt");
                     System.out.println(astarStrategy.getUtilityBoard().toString());
                 } default -> {
                     System.out.println("Incorrect algorithms.strategy");
