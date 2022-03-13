@@ -8,7 +8,7 @@ java -jar fifteenPuzzle-1.0-SNAPSHOT.jar` <strategy> <additional parameters> <so
 | ----------------------- | ---------------------------------------- |
 | breadth-first search    | `bfs`                                    |
 | depth-first search      | `dfs`                                    |
-| A-sta                   | `astr`                                   |
+| A-star                  | `astr`                                   |
 
   
 | Additional parameters   | Parameters_Acronym                       |
