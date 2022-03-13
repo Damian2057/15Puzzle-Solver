@@ -56,6 +56,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             // take the first of the queue as arrays for the work of subsequent recursion levels
             if(allBoards.isEmpty()) {
                 statsCollector.endWithOutSollution();
+                return;
             }
 
             this.utilityBoard = allBoards.pop();
