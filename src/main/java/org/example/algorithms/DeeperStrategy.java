@@ -16,6 +16,9 @@ public class DeeperStrategy extends MaxDepth implements strategy {
         statsCollector = new StatsCollector(sol,stats);
         this.utilityBoard = puzzleBoard;
         this.sequence = sequence;
+
+        statsCollector.endWithOutSollution();
+
         try {
             statsCollector.startTime();
             recursionSolver();
@@ -45,26 +48,22 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
 
             //Calls for sequence permutations LDRU...
-            for (int i = 0; i < 4; i++) {
-                //create only if current board if less than x iterations??
-                //check if board is already in stack?
-                doStepBySign(String.valueOf(sequence.charAt(i)));
+            if(utilityBoard.getCountOfSteps() < maxDepth) {
+                for (int i = 0; i < 4; i++) {
+                    //create only if current board if less than x iterations??
+                    //check if board is already in stack?
+                    doStepBySign(String.valueOf(sequence.charAt(i)));
+                }
             }
 
             // take the first of the queue as arrays for the work of subsequent recursion levels
-            this.utilityBoard = allBoards.pop();
-            if(!allBoards.isEmpty() && utilityBoard.getCountOfSteps() < maxDepth) {
-                recursionSolver();
-            }
-            try {
-                this.utilityBoard = allBoards.pop();
-                recursionSolver();
-            } catch (Exception e) {
-
-            }
             if(allBoards.isEmpty()) {
                 statsCollector.endWithOutSollution();
+                return;
             }
+
+            this.utilityBoard = allBoards.pop();
+           recursionSolver();
         } catch (Exception e) {
             e.printStackTrace();
             throw new SolutionException("Error getting solution");
