@@ -26,13 +26,13 @@ public class MainApp {
             switch (args[0]) {
                 case "bfs" -> {
                     BreadthStrategy acrossStrategy = new BreadthStrategy(puzzleBoard, args[1],args[3],args[4]);
-                    System.out.println(acrossStrategy.getUtilityBoard().toString());
+                    System.out.println("Solution\n"+acrossStrategy.getUtilityBoard().toString());
                 } case "dfs" -> {
                     DeeperStrategy deeperStrategy = new DeeperStrategy(puzzleBoard,args[1],args[3],args[4]);
-                    System.out.println(deeperStrategy.getUtilityBoard().toString());
+                    System.out.println("Solution\n"+deeperStrategy.getUtilityBoard().toString());
                 } case "astr" -> {
                     AstarStrategy astarStrategy = new AstarStrategy(puzzleBoard,args[1],args[3],args[4]);
-                    System.out.println(astarStrategy.getUtilityBoard().toString());
+                    System.out.println("Solution\n"+astarStrategy.getUtilityBoard().toString());
                 } default -> {
                     System.out.println("Incorrect algorithms.strategy");
                     return;
