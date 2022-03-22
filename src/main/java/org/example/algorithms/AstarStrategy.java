@@ -22,52 +22,9 @@ public class AstarStrategy extends MaxDepth {
         statsCollector.endWithOutSollution();
 
         try {
-            switch (algoritmType) {
-                case "manh" -> {
-                    statsCollector.startTime();
-                    recursionSolverM();
-                }
-                case "hamm" -> {
-                    statsCollector.startTime();
-                    recursionSolverH();
-                } default -> {
-                    throw new SolutionException("Wrong alg Type");
-                }
-            }
+            recursionSolver();
         } catch (Exception e) {
             throw new SolutionException("Error occurred during getting a solution");
-        }
-    }
-
-    public void recursionSolverM() {
-        try {
-
-            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
-                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
-            }
-
-            statsCollector.addVisitedStates();
-
-            if(utilityBoard.checkValidation()) {
-                //checking if the board is already solved
-                statsCollector.endWithSollution(utilityBoard);
-                return;
-            }
-
-            doStep();
-
-            utilityBoard = allBoards.get(0);
-            allBoards.remove(0);
-
-            if(allBoards.size() != 0) {
-                recursionSolverM();
-            } else {
-                statsCollector.endWithOutSollution();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new SolutionException("Error getting solution");
         }
     }
 
@@ -75,7 +32,7 @@ public class AstarStrategy extends MaxDepth {
         return utilityBoard;
     }
 
-    public void recursionSolverH() {
+    public void recursionSolver() {
         try {
 
             if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
@@ -85,24 +42,23 @@ public class AstarStrategy extends MaxDepth {
             statsCollector.addVisitedStates();
 
             if(utilityBoard.checkValidation()) {
-                //checking if the board is already solved
+                //checking if the board is solved
                 statsCollector.endWithSollution(utilityBoard);
                 return;
             }
 
             doStep();
 
-            //get current best element to analyze
             utilityBoard = allBoards.get(0);
             allBoards.remove(0);
 
             if(allBoards.size() != 0) {
-                recursionSolverM();
+                recursionSolver();
             } else {
                 statsCollector.endWithOutSollution();
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
             throw new SolutionException("Error getting solution");
         }
     }

@@ -52,4 +52,8 @@ public class StatsCollector {
     public int getVisitedStates() {
         return visitedStates;
     }
+
+    public long getStartTime() {
+        return startTime;
+    }
 }

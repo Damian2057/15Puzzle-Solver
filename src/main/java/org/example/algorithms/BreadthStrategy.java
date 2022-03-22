@@ -60,13 +60,12 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                 return;
             }
         } catch (Exception e) {
-            e.printStackTrace();
             throw new SolutionException("Error getting solution");
         }
     }
 
     @Override
-    public void doStepBySign( String sign) {
+    public void doStepBySign(String sign) {
         //We shift the field accordingly in one of the 4 trajectories.
         //The shift must satisfy the condition:
         // it is not an extreme shift, beyond the arrays

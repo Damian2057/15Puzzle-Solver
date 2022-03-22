@@ -56,12 +56,6 @@ public class DeeperStrategy extends MaxDepth implements strategy {
                 }
             }
 
-            // take the first of the queue as arrays for the work of subsequent recursion levels
-            if(allBoards.isEmpty()) {
-                statsCollector.endWithOutSollution();
-                return;
-            }
-
             this.utilityBoard = allBoards.pop();
            recursionSolver();
         } catch (Exception e) {
@@ -71,7 +65,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
     }
 
     @Override
-    public void doStepBySign( String sign) {
+    public void doStepBySign(String sign) {
         //We shift the field accordingly in one of the 4 trajectories.
         //The shift must satisfy the condition:
         // it is not an extreme shift, beyond the arrays
