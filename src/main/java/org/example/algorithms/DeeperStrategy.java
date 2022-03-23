@@ -27,16 +27,12 @@ public class DeeperStrategy extends MaxDepth implements strategy {
         }
     }
 
-    public PuzzleBoard getUtilityBoard() {
-        return utilityBoard;
-    }
-
     @Override
     public void recursionSolver() {
-        try {
+        do {
 
-            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
-                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfOperations()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfOperations());
             }
 
             statsCollector.addVisitedStates();
@@ -48,7 +44,7 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
 
             //Calls for sequence permutations LDRU...
-            if(utilityBoard.getCountOfSteps() < maxDepth) {
+            if(utilityBoard.getCountOfOperations() < maxDepth) {
                 for (int i = 0; i < 4; i++) {
                     //create only if current board if less than x iterations??
                     //check if board is already in stack?
@@ -57,11 +53,10 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             }
 
             this.utilityBoard = allBoards.pop();
-           recursionSolver();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new SolutionException("Error getting solution");
-        }
+
+        } while (!allBoards.isEmpty());
+        statsCollector.endWithOutSollution();
+        return;
     }
 
     @Override

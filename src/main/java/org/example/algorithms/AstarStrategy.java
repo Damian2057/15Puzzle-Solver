@@ -28,15 +28,11 @@ public class AstarStrategy extends MaxDepth {
         }
     }
 
-    public PuzzleBoard getUtilityBoard() {
-        return utilityBoard;
-    }
-
     public void recursionSolver() {
-        try {
+        do {
 
-            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
-                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfOperations()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfOperations());
             }
 
             statsCollector.addVisitedStates();
@@ -52,15 +48,10 @@ public class AstarStrategy extends MaxDepth {
             utilityBoard = allBoards.get(0);
             allBoards.remove(0);
 
-            if(allBoards.size() != 0) {
-                recursionSolver();
-            } else {
-                statsCollector.endWithOutSollution();
-            }
+        } while (!allBoards.isEmpty());
 
-        } catch (Exception e) {
-            throw new SolutionException("Error getting solution");
-        }
+        statsCollector.endWithOutSollution();
+        return;
     }
 
     public void doStep() {

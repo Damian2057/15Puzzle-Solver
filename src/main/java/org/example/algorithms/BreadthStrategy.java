@@ -27,15 +27,12 @@ public class BreadthStrategy extends MaxDepth implements strategy {
         }
     }
 
-    public PuzzleBoard getUtilityBoard() {
-        return utilityBoard;
-    }
-
     @Override
     public void recursionSolver() {
-        try {
-            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfSteps()) {
-                statsCollector.setRecursionDepth(utilityBoard.getCountOfSteps());
+        do {
+
+            if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfOperations()) {
+                statsCollector.setRecursionDepth(utilityBoard.getCountOfOperations());
             }
 
             statsCollector.addVisitedStates();
@@ -46,22 +43,15 @@ public class BreadthStrategy extends MaxDepth implements strategy {
                 return;
             }
 
-            //Calls for sequence permutations LDRU...
-                for (int i = 0; i < 4; i++) {
-                    doStepBySign(String.valueOf(sequence.charAt(i)));
-                }
-
-            // take the first of the queue as arrays for the work of subsequent recursion levels
-            this.utilityBoard = allBoards.pollFirst();
-            if(!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth) {
-                recursionSolver();
-            } else {
-                statsCollector.endWithOutSollution();
-                return;
+            for (int i = 0; i < 4; i++) {
+                doStepBySign(String.valueOf(sequence.charAt(i)));
             }
-        } catch (Exception e) {
-            throw new SolutionException("Error getting solution");
-        }
+
+            this.utilityBoard = allBoards.pollFirst();
+
+        } while (!allBoards.isEmpty() && statsCollector.getRecursionDepth() < maxDepth);
+        statsCollector.endWithOutSollution();
+        return;
     }
 
     @Override
