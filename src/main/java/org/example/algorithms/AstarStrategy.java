@@ -65,8 +65,10 @@ public class AstarStrategy extends MaxDepth {
             tempClone.moveEmptyFieldRight();
             statsCollector.addProcessedStates();
             if(Objects.equals(algorithmType, "manh")) {
+                tempClone.setManhattanScore(tempClone.manhattanScore());
                 manhOrder(tempClone);
             } else {
+                tempClone.setHammingScore(tempClone.hammingScore());
                 hammOrder(tempClone);
             }
 

@@ -210,11 +210,14 @@ public class PuzzleBoard implements Cloneable {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (index != this.board[i][j]) {
-                    sum += 1;
+                    sum++;
                 }
+                index++;
             }
         }
-        sum -= 1;
+        if(board[height-1][width-1] == 0) {
+            sum--;
+        }
         return sum;
     }
 }
