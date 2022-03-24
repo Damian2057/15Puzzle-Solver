@@ -151,12 +151,16 @@ public class PuzzleBoard implements Cloneable {
     }
 
     public boolean checkValidation() {
-        byte[][] tempBoard = generateSolvedBoard();
+        byte index = 1;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (tempBoard[i][j] != this.board[i][j]) {
+                if(index == width*height && this.board[i][j] == 0) {
+                    return true;
+                }
+                if (index != this.board[i][j]) {
                     return false;
                 }
+                index++;
             }
         }
         return true;
@@ -169,7 +173,6 @@ public class PuzzleBoard implements Cloneable {
 
     public int manhattanScore() {
         //sum of the distance of the points from their correct positions
-        byte[][] tempBoard = generateSolvedBoard();
         int sum = 0;
         byte index = 1;
         for (int i = 0; i < height; i++) {
@@ -178,6 +181,7 @@ public class PuzzleBoard implements Cloneable {
                     index++;
                 } else {
                     boolean flag = false;
+                    //wzor sprawdzic odleglosci wspolrzedne pola o danym numerku
                     for (int z = 0; z < height && !flag; z++) {
                         for (int k = 0; k < width && !flag ; k++) {
                             if(board[z][k] == index) {
@@ -195,15 +199,16 @@ public class PuzzleBoard implements Cloneable {
 
     public int hammingScore() {
         //The sum of the number of points not in their positions
-        byte[][] tempBoard = generateSolvedBoard();
+        byte index = 1;
         int sum = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (tempBoard[i][j] != this.board[i][j]) {
+                if (index != this.board[i][j]) {
                     sum += 1;
                 }
             }
         }
+        sum -= 1;
         return sum;
     }
 }

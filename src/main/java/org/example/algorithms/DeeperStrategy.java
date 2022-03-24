@@ -21,14 +21,14 @@ public class DeeperStrategy extends MaxDepth implements strategy {
 
         try {
             statsCollector.startTime();
-            recursionSolver();
+            solver();
         } catch (Exception e) {
             throw new SolutionException("Exp error");
         }
     }
 
     @Override
-    public void recursionSolver() {
+    public void solver() {
         do {
 
             if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfOperations()) {

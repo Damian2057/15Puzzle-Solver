@@ -22,13 +22,13 @@ public class AstarStrategy extends MaxDepth {
         statsCollector.endWithOutSollution();
 
         try {
-            recursionSolver();
+            solver();
         } catch (Exception e) {
             throw new SolutionException("Error occurred during getting a solution");
         }
     }
 
-    public void recursionSolver() {
+    public void solver() {
         do {
 
             if(statsCollector.getRecursionDepth() < utilityBoard.getCountOfOperations()) {

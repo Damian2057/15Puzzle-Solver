@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
 public interface strategy {
-    void recursionSolver();
+    void solver();
     void doStepBySign(String sign);
 }
