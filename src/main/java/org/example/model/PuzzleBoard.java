@@ -180,24 +180,18 @@ public class PuzzleBoard implements Cloneable {
     public int manhattanScore() {
         //sum of the distance of the points from their correct positions
         int sum = 0;
-        byte index = 1;
+        int M;
+        int N;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if(board[i][j] == index){
-                    index++;
+                if (board[i][j] == 0) {
+                    M = height - 1;
+                    N = width - 1;
                 } else {
-                    boolean flag = false;
-                    //wzor sprawdzic odleglosci wspolrzedne pola o danym numerku
-                    for (int z = 0; z < height && !flag; z++) {
-                        for (int k = 0; k < width && !flag ; k++) {
-                            if(board[z][k] == index) {
-                                sum = sum + Math.abs(z-i)+Math.abs(k-j);
-                                index++;
-                                flag = true;
-                            }
-                        }
-                    }
+                    M = (board[i][j] - 1) / width;
+                    N = (board[i][j] - 1) % width;
                 }
+                sum += Math.abs(i - M) + Math.abs(j - N);
             }
         }
         return sum;

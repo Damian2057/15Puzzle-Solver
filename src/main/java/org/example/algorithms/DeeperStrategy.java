@@ -46,8 +46,6 @@ public class DeeperStrategy extends MaxDepth implements strategy {
             //Calls for sequence permutations LDRU...
             if(utilityBoard.getCountOfOperations() < maxDepth) {
                 for (int i = 0; i < 4; i++) {
-                    //create only if current board if less than x iterations??
-                    //check if board is already in stack?
                     doStepBySign(String.valueOf(sequence.charAt(i)));
                 }
             }
