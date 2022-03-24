@@ -14,6 +14,9 @@ public class PuzzleBoard implements Cloneable {
     private final byte height;
     private String stepsToSolved = "";
 
+    private int hammingScore = 0;
+    private int manhattanScore = 0;
+
     public PuzzleBoard(byte[][] board, byte width, byte height) {
         this.board = board;
         this.width = width;
@@ -28,19 +31,22 @@ public class PuzzleBoard implements Cloneable {
         }
     }
 
-    public byte[][] generateSolvedBoard() {
-        byte tempIndex = 1;
-        byte[][] tempBoard = new byte[height][width];
-        for (int i = 0; i < this.height; i++) {
-            for (int j = 0; j < width; j++) {
-                tempBoard[i][j] = tempIndex;
-                tempIndex ++;
-            }
-        }
-        tempBoard[this.height -1][width-1] = 0;
-        return tempBoard;
+    public int getHammingScore() {
+        return hammingScore;
     }
-    
+
+    public void setHammingScore(int hammingScore) {
+        this.hammingScore = hammingScore;
+    }
+
+    public int getManhattanScore() {
+        return manhattanScore;
+    }
+
+    public void setManhattanScore(int manhattanScore) {
+        this.manhattanScore = manhattanScore;
+    }
+
     //When declaring, we first give the number of rows, then columns
     //So for ours, width is the number of columns and height is the number of lines.
 

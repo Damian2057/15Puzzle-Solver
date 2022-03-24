@@ -19,6 +19,9 @@ public class AstarStrategy extends MaxDepth {
         this.algorithmType = algoritmType;
         statsCollector = new StatsCollector(sol,stats);
 
+        utilityBoard.setManhattanScore(utilityBoard.manhattanScore());
+        utilityBoard.setHammingScore(utilityBoard.hammingScore());
+
         statsCollector.endWithOutSollution();
 
         try {
@@ -76,8 +79,10 @@ public class AstarStrategy extends MaxDepth {
             tempClone.moveEmptyFieldLeft();
             statsCollector.addProcessedStates();
             if(Objects.equals(algorithmType, "manh")) {
+                tempClone.setManhattanScore(tempClone.manhattanScore());
                 manhOrder(tempClone);
             } else {
+                tempClone.setHammingScore(tempClone.hammingScore());
                 hammOrder(tempClone);
             }
         }
@@ -89,8 +94,10 @@ public class AstarStrategy extends MaxDepth {
             tempClone.moveEmptyFieldUp();
             statsCollector.addProcessedStates();
             if(Objects.equals(algorithmType, "manh")) {
+                tempClone.setManhattanScore(tempClone.manhattanScore());
                 manhOrder(tempClone);
             } else {
+                tempClone.setHammingScore(tempClone.hammingScore());
                 hammOrder(tempClone);
             }
         }
@@ -102,8 +109,10 @@ public class AstarStrategy extends MaxDepth {
             tempClone.moveEmptyFieldDown();
             statsCollector.addProcessedStates();
             if(Objects.equals(algorithmType, "manh")) {
+                tempClone.setManhattanScore(tempClone.manhattanScore());
                 manhOrder(tempClone);
             } else {
+                tempClone.setHammingScore(tempClone.hammingScore());
                 hammOrder(tempClone);
             }
         }
@@ -116,7 +125,7 @@ public class AstarStrategy extends MaxDepth {
             //check manhattanScore(how many points do not fit into place)
             //depending on the result set the object in the right place
             //the best solutions are listed first and will be analyzed first
-            if (board.manhattanScore() < allBoards.get(i).manhattanScore()) {
+            if (board.getManhattanScore() < allBoards.get(i).getManhattanScore()) {
                 flag = false;
                 allBoards.add(i, board);
             }
@@ -135,7 +144,7 @@ public class AstarStrategy extends MaxDepth {
             //check hammingScore(how many points do not fit into place)
             //depending on the result set the object in the right place
             //the best solutions are listed first and will be analyzed first
-            if (board.hammingScore() < allBoards.get(i).hammingScore()) {
+            if (board.getHammingScore() < allBoards.get(i).getHammingScore()) {
                 flag = false;
                 allBoards.add(i, board);
             }
