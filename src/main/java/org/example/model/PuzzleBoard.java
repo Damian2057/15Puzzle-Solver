@@ -160,10 +160,10 @@ public class PuzzleBoard implements Cloneable {
         byte index = 1;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if(index == width*height && this.board[i][j] == 0) {
-                    return true;
-                }
                 if (index != this.board[i][j]) {
+                    if(index == width*height && this.board[i][j] == 0) {
+                        return true;
+                    }
                     return false;
                 }
                 index++;
