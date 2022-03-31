@@ -162,6 +162,7 @@ public class PuzzleBoard implements Cloneable {
             for (int j = 0; j < width; j++) {
                 if (index != this.board[i][j]) {
                     if(index == width*height && this.board[i][j] == 0) {
+
                         return true;
                     }
                     return false;
